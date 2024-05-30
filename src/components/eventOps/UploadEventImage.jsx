@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { storage } from '../../dbConfig/firebase';
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
+import { Box, Button, LinearProgress, Typography } from '@mui/material';
 
 function UploadEventImage({ onImageUpload }) {
   const [image, setImage] = useState(null);
@@ -12,7 +13,9 @@ function UploadEventImage({ onImageUpload }) {
     }
   };
 
-  const handleUpload = () => {
+  const handleUpload = (e) => {
+    e.preventDefault(); // Prevent form submission if button is inside a form
+
     if (!image) return;
 
     const storageRef = ref(storage, `eventImages/${image.name}`);
@@ -34,11 +37,27 @@ function UploadEventImage({ onImageUpload }) {
   };
 
   return (
-    <div>
-      <input type="file" onChange={handleChange} />
-      <button onClick={handleUpload}>Upload Image</button>
-      <p>Uploaded {progress}%</p>
-    </div>
+    <Box sx={{ mt: 2 }}>
+      <Button variant="contained" component="label">
+        Choose Image
+        <input type="file" hidden onChange={handleChange} />
+      </Button>
+      <Button
+        variant="contained"
+        color="secondary"
+        onClick={handleUpload}
+        sx={{ ml: 2 }}
+        disabled={!image}
+      >
+        Upload Image
+      </Button>
+      {progress > 0 && (
+        <Box sx={{ mt: 2, width: '100%' }}>
+          <LinearProgress variant="determinate" value={progress} />
+          <Typography variant="body2" color="textSecondary">{`Uploaded ${progress}%`}</Typography>
+        </Box>
+      )}
+    </Box>
   );
 }
 
