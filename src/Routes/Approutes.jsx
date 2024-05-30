@@ -6,6 +6,8 @@ import ScanQR from "../components/ScanQR/ScanQR";
 import GoogleAuth from "../components/googleAuth/GoogleAuth";
 import GetAllEventApp from "../components/eventOps/GetAllEvent";
 import CreateEvent from "../components/eventOps/CreateNewEvent";
+import MyEvents from "../components/eventOps/ListMyEvent";
+import EditEvent from "../components/eventOps/EditEvent";
 
 const router = createBrowserRouter([
   { path: "/", element: <App />},
@@ -14,6 +16,9 @@ const router = createBrowserRouter([
   { path: "/login", element: <GoogleAuth/> },
   { path: "/getAllevent", element: <GetAllEventApp/> },
   { path: "/createEvent", element: <CreateEvent/> },
+  { path: "/myEvents", element: <MyEvents/> },
+  { path: "/edit-event/:eventId", element: <EditEvent/> },
+
 ]);
 
 const AppRoutes = () => {
