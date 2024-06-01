@@ -1,7 +1,8 @@
 import { Html5QrcodeScanner } from 'html5-qrcode';
 import { useEffect, useState } from 'react';
-import { db, auth } from './../../dbConfig/firebase';
+import { db, auth } from '../../dbConfig/firebase';
 import { doc, setDoc, serverTimestamp } from 'firebase/firestore';
+import { useNavigate } from 'react-router-dom';
 import React from 'react';
 
 const ScanQR = () => {
@@ -9,6 +10,7 @@ const ScanQR = () => {
   const [manualSerialNumber, setManualSerialNumber] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const scanner = new Html5QrcodeScanner('reader', {
@@ -47,6 +49,11 @@ const ScanQR = () => {
       });
 
       console.log('User added to event attendees: ', userId);
+
+      // Navigate to PhotoUpload component with event ID
+      navigate('/upload-photos', {
+        state: { eventId, userId }
+      });
     } catch (err) {
       console.error('Error joining event: ', err);
       setError(err.message || 'An error occurred while joining the event');
