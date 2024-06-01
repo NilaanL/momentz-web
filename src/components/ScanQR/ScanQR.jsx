@@ -1,17 +1,18 @@
-import { Html5QrcodeScanner } from "html5-qrcode";
-import { useEffect, useState } from "react";
-import React from "react";
-const ScanQR = () => {
-    const [scanResult, setScanResult] = useState(null);
-    const [manualSerialNumber, setManualSerialNumber] = useState('');
+import { Html5QrcodeScanner } from 'html5-qrcode';
+import { useEffect, useState } from 'react';
+import { db, auth } from './../../dbConfig/firebase';
+import { doc, setDoc, serverTimestamp } from 'firebase/firestore';
+import React from 'react';
 
+const ScanQR = () => {
+  const [scanResult, setScanResult] = useState(null);
+  const [manualSerialNumber, setManualSerialNumber] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const scanner = new Html5QrcodeScanner('reader', {
-      qrbox: {
-        width: 250,
-        height: 250,
-      },
+      qrbox: { width: 250, height: 250 },
       fps: 5,
     });
 
@@ -23,7 +24,8 @@ const ScanQR = () => {
       if (isScanning) {
         scanner.clear();
         setScanResult(result);
-        isScanning = false; // Set isScanning to false to stop further scanning
+        handleJoinEvent(result); // Add attendee to event
+        isScanning = false;
       }
     }
 
@@ -32,9 +34,30 @@ const ScanQR = () => {
     }
   }, []);
 
-  function handleManualSerialNumberChange(event) {
+  const handleJoinEvent = async (eventId) => {
+    setIsLoading(true);
+
+    try {
+      const userId = auth.currentUser ? auth.currentUser.uid : 'test-user';
+      const attendeeRef = doc(db, 'Events', eventId, 'Event_Attendees', userId);
+
+      await setDoc(attendeeRef, {
+        user_id: userId,
+        join_date: serverTimestamp(),
+      });
+
+      console.log('User added to event attendees: ', userId);
+    } catch (err) {
+      console.error('Error joining event: ', err);
+      setError(err.message || 'An error occurred while joining the event');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleManualSerialNumberChange = (event) => {
     setManualSerialNumber(event.target.value);
-  }
+  };
 
   return (
     <div className="App">
@@ -42,24 +65,28 @@ const ScanQR = () => {
       {scanResult ? (
         <div>
           <p>Success: <a href={scanResult}>{scanResult}</a></p>
-          <p>Serial Number: {scanResult.slice(-16)}</p>
+          <p>Event ID: {scanResult}</p>
         </div>
       ) : (
         <div>
           <div id="reader"></div>
-          <p className="center-text">Or enter the serial number manually:</p>
+          <p className="center-text">Or enter the event ID manually:</p>
           <div className="center-input">
             <input
               type="text"
               value={manualSerialNumber}
               onChange={handleManualSerialNumberChange}
             />
-            {manualSerialNumber && (
-              <p>Serial Number: {manualSerialNumber.slice(-16)}</p>
-            )}
+            <button
+              onClick={() => handleJoinEvent(manualSerialNumber)}
+              disabled={isLoading}
+            >
+              Join Event
+            </button>
           </div>
         </div>
       )}
+      {error && <p style={{ color: 'red' }}>{error}</p>}
     </div>
   );
 };

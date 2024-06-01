@@ -8,6 +8,7 @@ import GetAllEventApp from "../components/eventOps/GetAllEvent";
 import CreateEvent from "../components/eventOps/CreateNewEvent";
 import MyEvents from "../components/eventOps/ListMyEvent";
 import EditEvent from "../components/eventOps/EditEvent";
+import EventDetails from "../components/eventOps/EventDetails";
 
 const router = createBrowserRouter([
   { path: "/", element: <App />},
@@ -18,6 +19,7 @@ const router = createBrowserRouter([
   { path: "/createEvent", element: <CreateEvent/> },
   { path: "/myEvents", element: <MyEvents/> },
   { path: "/edit-event/:eventId", element: <EditEvent/> },
+  { path: "/event-details", element: <EventDetails/> },
 
 ]);
 

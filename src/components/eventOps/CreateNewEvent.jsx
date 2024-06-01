@@ -1,16 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { addDoc, collection } from 'firebase/firestore';
-import { db, auth } from './../../dbConfig/firebase'; // Import your firebase configuration
-import { v4 as uuidv4 } from 'uuid'; // To generate unique IDs
+import { setDoc, doc } from 'firebase/firestore';
+import { db, auth } from './../../dbConfig/firebase';
+import { v4 as uuidv4 } from 'uuid';
 import UploadEventImage from './UploadEventImage';
-import {
-  TextField,
-  Button,
-  Container,
-  Typography,
-  Box,
-  CircularProgress,
-} from '@mui/material';
+import { TextField, Button, Container, Typography, Box, CircularProgress } from '@mui/material';
+import { useNavigate } from 'react-router-dom'; // Add this line for navigation
 import './CreateNewEvent.css';
 
 function CreateEvent() {
@@ -18,12 +12,12 @@ function CreateEvent() {
   const [description, setDescription] = useState('');
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
-  const [qrCode, setQrCode] = useState('');
   const [organizerId, setOrganizerId] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [eventImageUrl, setEventImageUrl] = useState(null);
   const [imageUploadComplete, setImageUploadComplete] = useState(false);
+  const navigate = useNavigate(); // Initialize useNavigate
 
   const handleImageUpload = (url) => {
     setEventImageUrl(url);
@@ -31,18 +25,13 @@ function CreateEvent() {
   };
 
   useEffect(() => {
-    // Fetch organizer ID from local storage or use default
     const organizer = auth.currentUser ? auth.currentUser.uid : 'test-user';
     setOrganizerId(organizer);
-
-    // Generate QR code based on event name
-    setQrCode(`${eventName}-${uuidv4()}`);
-  }, [eventName]);
+  }, []);
 
   const handleCreateEvent = async (e) => {
     e.preventDefault();
 
-    // Check if image upload is complete
     if (!imageUploadComplete) {
       setError('Please upload an image before creating the event.');
       return;
@@ -51,17 +40,35 @@ function CreateEvent() {
     setIsLoading(true);
 
     try {
-      const eventRef = await addDoc(collection(db, 'Events'), {
+      const newEventId = uuidv4();
+      const qrCodeValue = newEventId;
+
+      await setDoc(doc(db, 'Events', newEventId), {
+        id: newEventId,
         name: eventName,
         description,
-        start_date: new Date(startDate), // Convert to Firestore Timestamp
-        end_date: endDate ? new Date(endDate) : null, // Convert to Firestore Timestamp if provided
-        qr_code: qrCode,
+        start_date: new Date(startDate),
+        end_date: endDate ? new Date(endDate) : null,
+        qr_code: qrCodeValue,
         organizer_id: organizerId,
         image_url: eventImageUrl,
       });
 
-      console.log('Event created with ID: ', eventRef.id);
+      // Generate QR code URL
+      const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${qrCodeValue}`;
+
+      // Redirect to EventDetails component
+      navigate('/event-details', {
+        state: {
+          eventId: newEventId,
+          eventName,
+          description,
+          startDate,
+          endDate,
+          qrCodeUrl,
+          eventImageUrl
+        }
+      });
     } catch (err) {
       console.error('Error adding event: ', err);
       setError(err.message || 'An error occurred while creating the event');
@@ -136,7 +143,6 @@ function CreateEvent() {
           </Box>
           {error && <Typography color="error">{error}</Typography>}
         </form>
-        
       </Box>
     </Container>
   );

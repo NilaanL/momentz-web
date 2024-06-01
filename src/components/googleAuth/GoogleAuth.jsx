@@ -2,6 +2,7 @@ import { auth, googleProvider } from "../../dbConfig/firebase";
 import { signInWithPopup, signOut } from "firebase/auth";
 import { useState } from "react";
 import "./GoogleAuth.css"; // Import the CSS file for styling
+import CreateUserDocument from "../userOps/CreateUserDoc";
 
 const GoogleAuth = () => {
   const [email, setEmail] = useState("");
@@ -29,6 +30,8 @@ const GoogleAuth = () => {
     }
   };
 
+
+
   return (
     <div className="auth-container">
       <input
@@ -46,6 +49,7 @@ const GoogleAuth = () => {
       <button onClick={signInWithGoogle} className="auth-button">
         Sign In With Google
       </button>
+      <CreateUserDocument/>
 
       <button onClick={signOutWithGoogle} className="auth-button">
         Logout
