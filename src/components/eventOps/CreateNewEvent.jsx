@@ -1,11 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import { setDoc, doc } from 'firebase/firestore';
 import { db, auth } from './../../dbConfig/firebase';
-import { v4 as uuidv4 } from 'uuid';
 import UploadEventImage from './UploadEventImage';
 import { TextField, Button, Container, Typography, Box, CircularProgress } from '@mui/material';
-import { useNavigate } from 'react-router-dom'; // Add this line for navigation
+import { useNavigate } from 'react-router-dom';
 import './CreateNewEvent.css';
+
+// Custom event ID generator
+const generateCustomEventId = () => {
+  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  let result = '';
+  for (let i = 0; i < 3; i++) {
+    result += chars.charAt(Math.floor(Math.random() * chars.length));
+  }
+  result += '-';
+  for (let i = 0; i < 3; i++) {
+    result += chars.charAt(Math.floor(Math.random() * chars.length));
+  }
+  result += '-';
+  for (let i = 0; i < 3; i++) {
+    result += chars.charAt(Math.floor(Math.random() * chars.length));
+  }
+  return result;
+};
 
 function CreateEvent() {
   const [eventName, setEventName] = useState('');
@@ -17,7 +34,7 @@ function CreateEvent() {
   const [error, setError] = useState(null);
   const [eventImageUrl, setEventImageUrl] = useState(null);
   const [imageUploadComplete, setImageUploadComplete] = useState(false);
-  const navigate = useNavigate(); // Initialize useNavigate
+  const navigate = useNavigate();
 
   const handleImageUpload = (url) => {
     setEventImageUrl(url);
@@ -40,7 +57,7 @@ function CreateEvent() {
     setIsLoading(true);
 
     try {
-      const newEventId = uuidv4();
+      const newEventId = generateCustomEventId();
       const qrCodeValue = newEventId;
 
       await setDoc(doc(db, 'Events', newEventId), {

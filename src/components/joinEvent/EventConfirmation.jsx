@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation,useNavigate } from 'react-router-dom';
 import { db } from './../../dbConfig/firebase';
 import { doc, getDoc } from 'firebase/firestore';
 import { Box, Container, Typography, Grid, Paper } from '@mui/material';
 
 const EventConfirmation = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const { eventId, userId } = location.state;
   const [eventDetails, setEventDetails] = useState(null);
   const [userDetails, setUserDetails] = useState(null);
@@ -43,6 +44,11 @@ const EventConfirmation = () => {
   if (error) {
     return <Typography color="error">{error}</Typography>;
   }
+  
+    const handleClick = () => {
+      navigate('/event-dashboard', {  state: { eventId, userId } });
+    };
+  
 
   return (
     <Container maxWidth="md">
@@ -72,6 +78,7 @@ const EventConfirmation = () => {
                     </Grid>
                   ))}
                 </Grid>
+                <button onClick={handleClick}>Go to Event Dashboard</button>
               </Grid>
             </Grid>
           </Paper>
