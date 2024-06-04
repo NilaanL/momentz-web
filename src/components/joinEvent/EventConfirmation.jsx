@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation,useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { db } from './../../dbConfig/firebase';
 import { doc, getDoc } from 'firebase/firestore';
 import { Box, Container, Typography, Grid, Paper } from '@mui/material';
@@ -45,10 +45,11 @@ const EventConfirmation = () => {
     return <Typography color="error">{error}</Typography>;
   }
   
-    const handleClick = () => {
-      navigate('/event-dashboard', {  state: { eventId, userId } });
-    };
-  
+  const handleClick = () => {
+    localStorage.setItem('eventId', eventId);
+    localStorage.setItem('userId', userId);
+    navigate('/event-dashboard');
+  };
 
   return (
     <Container maxWidth="md">

@@ -12,6 +12,7 @@
     "emailjs-com": "^2.6.4",
     "firebase": "^10.12.1",
     "html5-qrcode": "^2.3.8",
+    "jszip": "^3.10.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-native-svg": "^15.3.0",

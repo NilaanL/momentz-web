@@ -1,61 +1,53 @@
-// UploadPhoto.jsx
-
 import React, { useState } from 'react';
+import { storage, db } from './../../dbConfig/firebase';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
-import { db, storage, auth } from './../../dbConfig/firebase';
-import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
-import { Box, Button, CircularProgress, Typography } from '@mui/material';
+import { collection, addDoc, Timestamp } from 'firebase/firestore';
+import { Box, Button, CircularProgress } from '@mui/material';
 
-const UploadPhoto = ({ eventId }) => {
-  const [file, setFile] = useState(null);
-  const [isUploading, setIsUploading] = useState(false);
-  const [error, setError] = useState(null);
+const UploadPhoto = ({ eventId, userId }) => {
+  const [files, setFiles] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const handleFileChange = (e) => {
-    setFile(e.target.files[0]);
+    setFiles(Array.from(e.target.files));
   };
 
   const handleUpload = async () => {
-    if (!file) {
-      setError('Please select a file to upload.');
-      return;
-    }
+    if (files.length === 0) return;
 
-    setIsUploading(true);
-
+    setLoading(true);
     try {
-      const userId = auth.currentUser ? auth.currentUser.uid : 'test-user';
-      const fileRef = ref(storage, `events/${eventId}/photos/${file.name}`);
-      await uploadBytes(fileRef, file);
-      const photoUrl = await getDownloadURL(fileRef);
+      const uploadPromises = files.map(async (file) => {
+        const storageRef = ref(storage, `event_photos/${eventId}/${file.name}`);
+        await uploadBytes(storageRef, file);
+        const downloadURL = await getDownloadURL(storageRef);
 
-      await addDoc(collection(db, 'Photos'), {
-        event_id: eventId,
-        user_id: userId,
-        upload_date: serverTimestamp(),
-        photo_url: photoUrl,
-        faces: [], // Assuming faces are detected and added later
+        await addDoc(collection(db, 'Photos'), {
+          event_id: eventId,
+          user_id: userId,
+          upload_date: Timestamp.now(),
+          photo_url: downloadURL,
+          faces: [], // This can be populated later with detected face IDs
+        });
       });
 
-      setFile(null);
-    } catch (err) {
-      console.error('Error uploading photo: ', err);
-      setError(err.message || 'An error occurred while uploading the photo.');
+      await Promise.all(uploadPromises);
+      alert('Photos uploaded successfully!');
+      setFiles([]);
+    } catch (error) {
+      console.error('Error uploading photos: ', error);
+      alert('Error uploading photos');
     } finally {
-      setIsUploading(false);
+      setLoading(false);
     }
   };
 
   return (
-    <Box sx={{ mt: 3 }}>
-      <Typography variant="h6" gutterBottom>
-        Upload Photo
-      </Typography>
-      <input type="file" onChange={handleFileChange} />
-      <Button variant="contained" color="primary" onClick={handleUpload} disabled={isUploading}>
-        {isUploading ? <CircularProgress size={24} /> : 'Upload'}
+    <Box sx={{ mb: 3 }}>
+      <input type="file" multiple onChange={handleFileChange} />
+      <Button variant="contained" color="primary" onClick={handleUpload} disabled={loading || files.length === 0}>
+        {loading ? <CircularProgress size={24} /> : 'Upload Photos'}
       </Button>
-      {error && <Typography color="error">{error}</Typography>}
     </Box>
   );
 };
