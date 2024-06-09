@@ -2,9 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { setDoc, doc } from 'firebase/firestore';
 import { db, auth } from './../../dbConfig/firebase';
 import UploadEventImage from './UploadEventImage';
-import { TextField, Button, Container, Typography, Box, CircularProgress } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import './CreateNewEvent.css';
+import './CreateNewEvent.css'; // Import the CSS file
 
 // Custom event ID generator
 const generateCustomEventId = () => {
@@ -95,73 +94,61 @@ function CreateEvent() {
   };
 
   return (
-    <Container maxWidth="sm">
-      <Box sx={{ mt: 5 }}>
-        <Typography variant="h4" component="h1" gutterBottom>
-          Create Event
-        </Typography>
+    <div>
+      <div >
+        <p>Create Event</p>
         <form onSubmit={handleCreateEvent}>
-          <TextField
-            label="Event Name"
-            variant="outlined"
-            fullWidth
-            margin="normal"
-            value={eventName}
-            onChange={(e) => setEventName(e.target.value)}
-            required
-          />
-          <TextField
-            label="Description"
-            variant="outlined"
-            fullWidth
-            margin="normal"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-          />
-          <TextField
-            label="Start Date"
-            type="datetime-local"
-            variant="outlined"
-            fullWidth
-            margin="normal"
-            InputLabelProps={{
-              shrink: true,
-            }}
-            value={startDate}
-            onChange={(e) => setStartDate(e.target.value)}
-            required
-          />
-          <TextField
-            label="End Date"
-            type="datetime-local"
-            variant="outlined"
-            fullWidth
-            margin="normal"
-            InputLabelProps={{
-              shrink: true,
-            }}
-            value={endDate}
-            onChange={(e) => setEndDate(e.target.value)}
-          />
+          <div className="form-group">
+            <label htmlFor="eventName">Event Name</label>
+            <input
+              type="text"
+              id="eventName"
+              value={eventName}
+              onChange={(e) => setEventName(e.target.value)}
+              required
+            />
+          </div>
+          <div>
+            <label htmlFor="description">Description</label>
+            <textarea
+              id="description"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+            />
+          </div>
+          <div>
+            <label htmlFor="startDate">Start Date</label>
+            <input
+              type="datetime-local"
+              id="startDate"
+              value={startDate}
+              onChange={(e) => setStartDate(e.target.value)}
+              required
+            />
+          </div>
+          <div>
+            <label htmlFor="endDate">End Date</label>
+            <input
+              type="datetime-local"
+              id="endDate"
+              value={endDate}
+              onChange={(e) => setEndDate(e.target.value)}
+            />
+          </div>
           <UploadEventImage onImageUpload={handleImageUpload} />
-          <Box sx={{ mt: 3, textAlign: 'center' }}>
+          <div>
             {isLoading ? (
-              <CircularProgress />
+              <div></div>
             ) : (
-              <Button
-                type="submit"
-                variant="contained"
-                color="primary"
-                disabled={isLoading || !imageUploadComplete}
-              >
+              <button type="submit" disabled={isLoading || !imageUploadComplete}>
                 Create Event
-              </Button>
+              </button>
             )}
-          </Box>
-          {error && <Typography color="error">{error}</Typography>}
+          </div>
+          {error && <p>{error}</p>}
         </form>
-      </Box>
-    </Container>
+      </div>
+    </div>
   );
 }
 

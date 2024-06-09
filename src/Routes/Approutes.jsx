@@ -12,9 +12,11 @@ import EventDetails from "../components/eventOps/EventDetails";
 import PhotoUpload from "../components/joinEvent/PhotoUpload";
 import EventConfirmation from "../components/joinEvent/EventConfirmation";
 import EventDashboard from "../components/eventDashBoard/EventDashBoard";
+import HomePage from "../Pages/Homepage";
 
 const router = createBrowserRouter([
   { path: "/", element: <App />},
+  { path:"/home", element: <HomePage/>},
   { path: "/genQR", element: <GenQR /> },
   { path: "/joinEvent", element: <ScanQR/> },
   { path: "/login", element: <GoogleAuth/> },
