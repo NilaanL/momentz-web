@@ -7,8 +7,7 @@ import "./CreateNewEvent.css"; // Import the CSS file
 import createEventImage from "./createEvent.png";
 
 const generateCustomEventId = () => {
-  const chars =
-    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
   let result = "";
   for (let i = 0; i < 3; i++) {
     result += chars.charAt(Math.floor(Math.random() * chars.length));
@@ -109,7 +108,6 @@ function CreateEvent() {
                 <input
                   type="text"
                   id="eventName"
-                  placeholder="Enter event name"
                   className="create-event-form-control"
                   value={eventName}
                   onChange={(e) => setEventName(e.target.value)}
@@ -122,38 +120,37 @@ function CreateEvent() {
                 </label>
                 <textarea
                   id="description"
-                  placeholder="Enter event description"
                   className="create-event-form-control"
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
                 />
               </div>
               <div className="create-event-form-group-date-container">
-              <div className="create-event-form-group">
-                <label className="create-event-label" htmlFor="startDate">
-                  Start Date
-                </label>
-                <input
-                  type="datetime-local"
-                  id="startDate"
-                  className="create-event-form-control"
-                  value={startDate}
-                  onChange={(e) => setStartDate(e.target.value)}
-                  required
-                />
-              </div>
-              <div className="create-event-form-group">
-                <label className="create-event-label" htmlFor="endDate">
-                  End Date
-                </label>
-                <input
-                  type="datetime-local"
-                  id="endDate"
-                  className="create-event-form-control"
-                  value={endDate}
-                  onChange={(e) => setEndDate(e.target.value)}
-                />
-              </div>
+                <div className="create-event-form-group">
+                  <label className="create-event-label" htmlFor="startDate">
+                    Start Date
+                  </label>
+                  <input
+                    type="datetime-local"
+                    id="startDate"
+                    className="create-event-form-control"
+                    value={startDate}
+                    onChange={(e) => setStartDate(e.target.value)}
+                    required
+                  />
+                </div>
+                <div className="create-event-form-group">
+                  <label className="create-event-label" htmlFor="endDate">
+                    End Date
+                  </label>
+                  <input
+                    type="datetime-local"
+                    id="endDate"
+                    className="create-event-form-control"
+                    value={endDate}
+                    onChange={(e) => setEndDate(e.target.value)}
+                  />
+                </div>
               </div>
               <UploadEventImage onImageUpload={handleImageUpload} />
               <div className="create-event-form-group">

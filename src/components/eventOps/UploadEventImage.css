@@ -4,7 +4,6 @@
   gap: 100px;
   margin-top: 20px;
   align-items: center;
-  position: relative;
 }
 
 .upload-button {
@@ -13,9 +12,18 @@
   width: 115px;
   color: #fff;
   border-radius: 5px;
+  background-color: #006d77;
+  height: 30px;
+  width: 115px;
+  color: #fff;
+  border-radius: 5px;
 }
 
 .upload-button:disabled {
+  background-color: #e7e7e7;
+  color: #006d77;
+  height: 30px;
+  width: 115px;
   background-color: #e7e7e7;
   color: #006d77;
   height: 30px;
@@ -29,55 +37,6 @@
   height: 40px;
 }
 
-.progress-bar {
-  position: relative;
-  width: 115px;
-  height: 18px;
-  margin-top: 5px;
-}
-
-.progress-bar progress {
-  width: 100%;
-  height: 100%;
-  appearance: none;
-}
-
-.progress-bar progress::-webkit-progress-bar {
-  background-color: #b1dde1;
-}
-
-.progress-bar progress::-webkit-progress-value {
-  background-color: #00f821; /* Progress bar color */
-}
-
-.progress-text {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 14px;
-  color: #fff;
-  font-weight: bold;
-}
-
-.upload-button-and-percentage {
-  display: flex;
-  flex-direction: column;
-}
-
-
-@media all and (max-width: 1200px) {
-  .progress-bar {
-    position: absolute;
-    right: 0;
-    bottom: -24px;
-  }
-
-  .progress-bar progress {
-    margin-bottom: 10px;
-  }
-}
-
 @media all and (max-width: 500px) {
   .choose-file-input-type {
     width: 282px;
@@ -85,7 +44,7 @@
 }
 
 @media all and (max-width: 450px) {
-  .choose-file-input-type {
-    width: 189px;
+    .choose-file-input-type {
+      width: 189px;
+    }
   }
-}

@@ -82,89 +82,53 @@ textarea.form-control {
   resize: vertical;
 }
 
-.create-event-button {
-  width: 150px;
-  height: 37px;
-  color: #fff;
-  font-size: 15px;
-  border-radius: 8px;
-  background-color: #007074;
-}
-
-.loading-spinner {
-  border: 4px solid #f3f3f3;
-  border-radius: 50%;
-  border-top: 4px solid #007bff;
-  width: 24px;
-  height: 24px;
-  animation: spin 2s linear infinite;
-}
-
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-.error-message {
-  color: red;
-  font-size: 14px;
-  margin-top: 10px;
-}
-
-@media all and (max-width: 1200px) {
-  .create-event-image {
-    display: none;
-  }
-
-  .create-event-main-container {
-    padding: 0;
-    background-color: #fff;
-  }
-
-  .create-event-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    height: 100vh;
-  }
-
-  .create-event-form-container {
-    background-color: #fff;
-  }
-
-  .create-event-form-control {
-    padding: 10px;
-    border-radius: 15px;
-  }
-
-  .create-event-form-group-date-container {
-    flex-direction: column;
-  }
-
   .create-event-button {
-    width: 100%;
-    height: 45px;
-    margin-top: 20px;
+    width: 320px;
+    height: 55px;
+    color: #fff;
+    font-size: 26px;
+    border-radius: 8px;
+    background-color: #007074;
+    cursor: pointer;
   }
-
-  .create-event-form {
-    gap: 20px;
-  }
-}
-
-@media all and (max-width: 500px) {
-  /* .create-event-form-group {
-    align-items: center;
+  
+  /* .create-event-button:disabled {
+    background-color: #007074;
   } */
-
-  .create-event-form-control {
-    align-items: center;
-    width: 400px;
+  
+  .loading-spinner {
+    border: 4px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 4px solid #007bff;
+    width: 24px;
+    height: 24px;
+    animation: spin 2s linear infinite;
   }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  .error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: 10px;
+  }
+  
+  @media all and (max-width: 1170px) {
+    .create-event-container {
+      grid-template-columns: 1fr;
+    }
+  
+    .create-event-image img {
+      display: none;
+    }
+  
+    .create-event-form-container {
+      padding-right: 0;
+      padding: 0 55px;
+    }
 
   .create-event-image-uploader {
     gap: 0;
