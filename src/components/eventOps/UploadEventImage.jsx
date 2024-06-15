@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { storage } from '../../dbConfig/firebase';
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
-import { Box, Button, LinearProgress, Typography } from '@mui/material';
+import './UploadEventImage.css'; // Import the CSS file
 
 function UploadEventImage({ onImageUpload }) {
   const [image, setImage] = useState(null);
@@ -37,27 +37,25 @@ function UploadEventImage({ onImageUpload }) {
   };
 
   return (
-    <Box sx={{ mt: 2 }}>
-      <Button variant="contained" component="label">
-        Choose Image
-        <input type="file" hidden onChange={handleChange} />
-      </Button>
-      <Button
-        variant="contained"
-        color="secondary"
+    <div className="create-event-image-uploader">
+      <label className="choose-image-button">
+        {/* Choose Image */}
+        <input type="file" hidden onChange={handleChange} className='choose-file-input-type'/>
+      </label>
+      <button
+        className="upload-button"
         onClick={handleUpload}
-        sx={{ ml: 2 }}
         disabled={!image}
       >
         Upload Image
-      </Button>
+      </button>
       {progress > 0 && (
-        <Box sx={{ mt: 2, width: '100%' }}>
-          <LinearProgress variant="determinate" value={progress} />
-          <Typography variant="body2" color="textSecondary">{`Uploaded ${progress}%`}</Typography>
-        </Box>
+        <div className="progress-bar">
+          <progress value={progress} max="100"></progress>
+          <span>{`Uploaded ${progress}%`}</span>
+        </div>
       )}
-    </Box>
+    </div>
   );
 }
 

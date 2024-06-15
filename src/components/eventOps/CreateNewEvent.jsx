@@ -4,8 +4,8 @@ import { db, auth } from './../../dbConfig/firebase';
 import UploadEventImage from './UploadEventImage';
 import { useNavigate } from 'react-router-dom';
 import './CreateNewEvent.css'; // Import the CSS file
+import createEventImage from "./a.png";
 
-// Custom event ID generator
 const generateCustomEventId = () => {
   const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
   let result = '';
@@ -70,10 +70,8 @@ function CreateEvent() {
         image_url: eventImageUrl,
       });
 
-      // Generate QR code URL
       const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${qrCodeValue}`;
 
-      // Redirect to EventDetails component
       navigate('/event-details', {
         state: {
           eventId: newEventId,
@@ -94,58 +92,65 @@ function CreateEvent() {
   };
 
   return (
-    <div>
-      <div >
-        <p>Create Event</p>
-        <form onSubmit={handleCreateEvent}>
-          <div className="form-group">
-            <label htmlFor="eventName">Event Name</label>
+    <div className="create-event-container">
+      <div className="create-event-image">
+        <img src={createEventImage} alt="Event" />
+      </div>
+      <div className="create-event-form-container">
+        <p className="create-event-title">Create Event</p>
+        <form className="create-event-form" onSubmit={handleCreateEvent}>
+          <div className="create-event-form-group">
+            <label className='create-event-label' htmlFor="eventName">Event Name</label>
             <input
               type="text"
               id="eventName"
+              className="create-event-form-control"
               value={eventName}
               onChange={(e) => setEventName(e.target.value)}
               required
             />
           </div>
-          <div>
-            <label htmlFor="description">Description</label>
+          <div className="create-event-form-group">
+            <label className='create-event-label' htmlFor="description">Description</label>
             <textarea
               id="description"
+              className="create-event-form-control"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
             />
           </div>
-          <div>
-            <label htmlFor="startDate">Start Date</label>
+          <div className="create-event-form-group">
+            <label className='create-event-label' htmlFor="startDate">Start Date</label>
             <input
               type="datetime-local"
               id="startDate"
+              className="create-event-form-control"
               value={startDate}
               onChange={(e) => setStartDate(e.target.value)}
               required
             />
           </div>
-          <div>
-            <label htmlFor="endDate">End Date</label>
+          <div className="create-event-form-group">
+            <label className='create-event-label' htmlFor="endDate">End Date</label>
             <input
               type="datetime-local"
               id="endDate"
+              className="create-event-form-control"
               value={endDate}
               onChange={(e) => setEndDate(e.target.value)}
             />
           </div>
           <UploadEventImage onImageUpload={handleImageUpload} />
-          <div>
+          <div className="create-event-form-group">
             {isLoading ? (
-              <div></div>
+              <div className="loading-spinner"></div>
             ) : (
-              <button type="submit" disabled={isLoading || !imageUploadComplete}>
+              <button type="submit" className="create-event-button" disabled={isLoading || !imageUploadComplete}>
                 Create Event
               </button>
             )}
           </div>
-          {error && <p>{error}</p>}
+          {error && <p className="error-message">{error}</p>}
         </form>
       </div>
     </div>

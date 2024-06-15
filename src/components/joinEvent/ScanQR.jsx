@@ -1,22 +1,23 @@
-import { Html5QrcodeScanner } from 'html5-qrcode';
-import { useEffect, useState } from 'react';
-import { db, auth } from '../../dbConfig/firebase';
-import { doc, setDoc, serverTimestamp } from 'firebase/firestore';
-import { useNavigate } from 'react-router-dom';
-import React from 'react';
+import { Html5QrcodeScanner } from "html5-qrcode";
+import { useEffect, useState } from "react";
+import { db, auth } from "../../dbConfig/firebase";
+import { doc, setDoc, serverTimestamp } from "firebase/firestore";
+import { useNavigate } from "react-router-dom";
+import React from "react";
+import "./ScanQR.css"; // Import the CSS file
+import joinEventImage from "./qrblue.jpg";
+import svgOne from "./svgviewer-output.png";
+import svgTwo from "./svgviewer-output-two.png";
 
 const ScanQR = () => {
   const [scanResult, setScanResult] = useState(null);
-  const [manualSerialNumber, setManualSerialNumber] = useState('');
+  const [manualSerialNumber, setManualSerialNumber] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const scanner = new Html5QrcodeScanner('reader', {
-      qrbox: { width: 250, height: 250 },
-      fps: 5,
-    });
+    const scanner = new Html5QrcodeScanner("join-event-reader", {});
 
     let isScanning = true;
 
@@ -40,23 +41,23 @@ const ScanQR = () => {
     setIsLoading(true);
 
     try {
-      const userId = auth.currentUser ? auth.currentUser.uid : 'test-user';
-      const attendeeRef = doc(db, 'Events', eventId, 'Event_Attendees', userId);
+      const userId = auth.currentUser ? auth.currentUser.uid : "test-user";
+      const attendeeRef = doc(db, "Events", eventId, "Event_Attendees", userId);
 
       await setDoc(attendeeRef, {
         user_id: userId,
         join_date: serverTimestamp(),
       });
 
-      console.log('User added to event attendees: ', userId);
+      console.log("User added to event attendees: ", userId);
 
       // Navigate to PhotoUpload component with event ID
-      navigate('/upload-photos', {
-        state: { eventId, userId }
+      navigate("/upload-photos", {
+        state: { eventId, userId },
       });
     } catch (err) {
-      console.error('Error joining event: ', err);
-      setError(err.message || 'An error occurred while joining the event');
+      console.error("Error joining event: ", err);
+      setError(err.message || "An error occurred while joining the event");
     } finally {
       setIsLoading(false);
     }
@@ -67,33 +68,61 @@ const ScanQR = () => {
   };
 
   return (
-    <div className="App">
-      <h1>QR Scanning Code</h1>
-      {scanResult ? (
-        <div>
-          <p>Success: <a href={scanResult}>{scanResult}</a></p>
-          <p>Event ID: {scanResult}</p>
+    <div className="join-event-container">
+     
+      <div className="join-event-image-container">
+        <img
+          src={joinEventImage}
+          alt="joinEvent"
+          className="join-event-image"
+        />
+      </div>
+      <div className="join-event-text-container">
+      <div className="join-event-svg-one">
+        <img src={svgOne} alt="svgOne" className="join-event-svg-one" />
+      </div>
+      <div className="join-event-svg-two">
+        <img src={svgTwo} alt="svgTwo" className="join-event-svg-two" />
+      </div>
+        <div className="join-event-heading">
+          Join us for a memorable
+          <br /> celebration!
         </div>
-      ) : (
-        <div>
-          <div id="reader"></div>
-          <p className="center-text">Or enter the event ID manually:</p>
-          <div className="center-input">
-            <input
-              type="text"
-              value={manualSerialNumber}
-              onChange={handleManualSerialNumberChange}
-            />
-            <button
-              onClick={() => handleJoinEvent(manualSerialNumber)}
-              disabled={isLoading}
-            >
-              Join Event
-            </button>
+        {scanResult ? (
+          <div className="join-event-scan-qr">
+            <p>
+              Success: <a href={scanResult}>{scanResult}</a>
+            </p>
+            <p>Event ID: {scanResult}</p>
           </div>
-        </div>
-      )}
-      {error && <p style={{ color: 'red' }}>{error}</p>}
+        ) : (
+          <div className="join-event-bottom">
+            <div id="join-event-reader" className="join-event-qr-reader"></div>
+            <div className="join-event-line-container">
+              <div className="join-event-line"></div>
+              <span className="join-event-center-text-or">OR</span>
+              <div className="join-event-line"></div>
+            </div>
+            <span className="join-event-center-text">Enter the Event ID</span>
+            <div className="join-event-center-input">
+              <input
+                type="text"
+                value={manualSerialNumber}
+                onChange={handleManualSerialNumberChange}
+                className="join-event-manual-input"
+              />
+              <button
+                onClick={() => handleJoinEvent(manualSerialNumber)}
+                disabled={isLoading}
+                className="join-event-join-button"
+              >
+                Join Event
+              </button>
+            </div>
+          </div>
+        )}
+        {error && <p className="join-event-error-text">{error}</p>}
+      </div>
     </div>
   );
 };
