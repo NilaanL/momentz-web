@@ -77,11 +77,11 @@ const GuestList = ({ eventId }) => {
       <Grid container spacing={2}>
         {guests.map(guest => (
           <Grid item xs={12} sm={6} md={4} key={guest.id}>
-            <Card className="guest-card">
+            <Card className="guest-list-card">
               <CardContent>
-                <div className="guest-photos">
+                <div className="guest-list-photos">
                   {guest.photos.map((photo, index) => (
-                    <Avatar key={index} src={photo} alt={guest.name} className="guest-avatar" />
+                    <Avatar key={index} src={photo} alt={guest.name} className="guest-list-avatar" />
                   ))}
                 </div>
                 <Typography variant="h6" component="div">
@@ -104,8 +104,8 @@ const GuestList = ({ eventId }) => {
           </Grid>
         ))}
       </Grid>
-      <Box className="total-guests-card-container">
-        <Card className="total-guests-card">
+      <Box className="guest-list-total-guests-card-container">
+        <Card className="guest-list-total-guests-card">
           <CardContent>
             <Typography variant="h5" component="div">
               Total Guests

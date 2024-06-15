@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { db, storage } from './../../dbConfig/firebase';
 import { doc, updateDoc } from 'firebase/firestore';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
-import { TextField, Button, Typography, Grid, Box, IconButton, CircularProgress } from '@mui/material';
+import { TextField, Button, Typography, Box, IconButton, CircularProgress } from '@mui/material';
 import { PhotoCamera } from '@mui/icons-material';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -90,9 +90,9 @@ const EventDetails = ({ event }) => {
             shrink: true,
           }}
         />
-        <Box className="image-upload-section">
+        <Box className="event-details-image-upload-section">
           <Typography variant="subtitle1">Event Image</Typography>
-          <img src={imageUrl} alt={name} className="event-image" />
+          <img src={imageUrl} alt={name} className="event-details-event-image" />
           <input
             accept="image/*"
             style={{ display: 'none' }}
@@ -117,7 +117,7 @@ const EventDetails = ({ event }) => {
           fullWidth
           onClick={handleUpdate}
           disabled={loading}
-          className="update-button"
+          className="event-details-update-button"
         >
           {loading ? <CircularProgress size={24} /> : 'Update Event'}
         </Button>

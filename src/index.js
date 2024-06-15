@@ -5,11 +5,15 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import Modal from 'react-modal';
 import AppRoutes from './Routes/Approutes';
+import { Provider } from 'react-redux';
+import store from './store';
 Modal.setAppElement('#root');
 
 ReactDOM.render(
   <React.StrictMode>
+  {/* <Provider store={store}> */}
     <AppRoutes />
+    {/* </Provider> */}
   </React.StrictMode>,
   document.getElementById('root')
 );

@@ -1,3 +1,39 @@
-.download-photos {
-    padding: 20px;
-  }
+.download-photos-container {
+  padding: 20px;
+}
+
+.photos-grid {
+  margin-top: 20px;
+}
+
+.photo-item {
+  position: relative;
+}
+
+.photo-wrapper {
+  cursor: pointer;
+  position: relative;
+}
+
+.photo-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+
+.photo-img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.bulk-actions {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}

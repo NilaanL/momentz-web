@@ -10,6 +10,9 @@ import Reports from './Reports';
 import FaceGroups from './FaceGroups';
 import CircularProgress from '@mui/material/CircularProgress';
 import './HostDashboard.css';
+import HostDashboardNavBar from './HostDashBoardNavBar';
+import { useMediaQuery } from '@mui/material';
+
 
 const HostDashboard = () => {
   const [user, setUser] = useState(null);
@@ -17,6 +20,8 @@ const HostDashboard = () => {
   const [currentSection, setCurrentSection] = useState('eventDetails');
   const [loading, setLoading] = useState(true);
   const [authLoading, setAuthLoading] = useState(true);
+  const isMobile = useMediaQuery('(max-width:768px)');
+
 
   useEffect(() => {
     const fetchEvent = async () => {
@@ -52,7 +57,7 @@ const HostDashboard = () => {
 
   if (authLoading || loading) {
     return (
-      <div className="loading-container">
+      <div className="host-dashboard-loading-container">
         <CircularProgress />
         <div>Loading...</div>
       </div>
@@ -60,13 +65,14 @@ const HostDashboard = () => {
   }
 
   if (!user || !event) {
-    return <div>Loading failed. Please try again.</div>;
+    return <div className="host-dashboard-loading-failed">Loading failed. Please try again.</div>;
   }
 
   return (
     <div className="host-dashboard-container">
-      <HostSideBar user={user} setCurrentSection={setCurrentSection} />
-      <div className="host-main-content">
+      { !isMobile && <HostSideBar user={user} setCurrentSection={setCurrentSection} />}
+      {isMobile && <HostDashboardNavBar user={user} setCurrentSection={setCurrentSection} />}
+      <div className="host-dashboard-main-content">
         {currentSection === 'eventDetails' && <EventDetails event={event} />}
         {currentSection === 'guestList' && <GuestList eventId={event.id} />}
         {currentSection === 'allPhotos' && <AllPhotos eventId={event.id} />}

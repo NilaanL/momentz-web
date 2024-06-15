@@ -4,21 +4,21 @@ import './HostSideBar.css';
 
 const HostSideBar = ({ user, setCurrentSection }) => {
   return (
-    <div className="host-sidebar">
-      <div className="profile-section">
-        <Avatar src={user.photoURL} alt={user.displayName} className="profile-picture" />
-        <h2 className="profile-name">{user.displayName}</h2>
+    <div className="host-sidebar-container">
+      <div className="host-sidebar-profile-section">
+        <Avatar src={user.photoURL} alt={user.displayName} className="host-sidebar-profile-picture" />
+        <h2 className="host-sidebar-profile-name">{user.displayName}</h2>
       </div>
-      <div className="nav-section">
-        <Button variant="contained" className="nav-button" onClick={() => setCurrentSection('eventDetails')}>Event Details</Button>
-        <Button className="nav-button" onClick={() => setCurrentSection('guestList')}>Guest List</Button>
-        <Button className="nav-button" onClick={() => setCurrentSection('allPhotos')}>All Photos</Button>
-        <Button className="nav-button" onClick={() => setCurrentSection('reports')}>Reports</Button>
-        <Button className="nav-button" onClick={() => setCurrentSection('faceGroups')}>Face Groups</Button>
+      <div className="host-sidebar-nav-section">
+        <Button variant="contained" className="host-sidebar-nav-button" onClick={() => setCurrentSection('eventDetails')}>Event Details</Button>
+        <Button className="host-sidebar-nav-button" onClick={() => setCurrentSection('guestList')}>Guest List</Button>
+        <Button className="host-sidebar-nav-button" onClick={() => setCurrentSection('allPhotos')}>All Photos</Button>
+        <Button className="host-sidebar-nav-button" onClick={() => setCurrentSection('reports')}>Reports</Button>
+        <Button className="host-sidebar-nav-button" onClick={() => setCurrentSection('faceGroups')}>Face Groups</Button>
       </div>
-      <div className="bottom-section">
-        <Button className="logout-button">Logout</Button>
-        <Button className="help-button">? Help</Button>
+      <div className="host-sidebar-bottom-section">
+        <Button className="host-sidebar-logout-button">Logout</Button>
+        <Button className="host-sidebar-help-button">? Help</Button>
       </div>
     </div>
   );

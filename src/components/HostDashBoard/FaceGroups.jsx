@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { db } from './../../dbConfig/firebase';
-import { updateDoc,collection, getDocs, deleteDoc, doc, getDoc, query, where } from 'firebase/firestore';
-import { Card, CardContent, Typography, Avatar, Grid, IconButton } from '@mui/material';
+import { updateDoc, collection, getDocs, deleteDoc, doc, getDoc, query, where } from 'firebase/firestore';
+import { Card, CardContent, Typography, Grid, IconButton } from '@mui/material';
 import { Delete } from '@mui/icons-material';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';

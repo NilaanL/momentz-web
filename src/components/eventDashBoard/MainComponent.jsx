@@ -10,6 +10,8 @@ import Favorites from './Favorites';
 import ListView from './ListView';
 import CircularProgress from '@mui/material/CircularProgress';
 import './MainComponent.css';
+import { useMediaQuery } from '@mui/material';
+import DashboardNavBar from './DashboardNavBar';
 
 const MainComponent = () => {
   const [user, setUser] = useState(null);
@@ -17,6 +19,8 @@ const MainComponent = () => {
   const [currentSection, setCurrentSection] = useState('yourPhotos');
   const [loading, setLoading] = useState(true);
   const [authLoading, setAuthLoading] = useState(true);
+
+  const isMobile = useMediaQuery('(max-width:768px)'); // Define your breakpoint here
 
   useEffect(() => {
     const fetchEvent = async () => {
@@ -65,18 +69,19 @@ const MainComponent = () => {
 
   return (
     <React.Fragment>
-    <div className="main-container">
-      <SideBar user={user} setCurrentSection={setCurrentSection} />
-      <div className="main-content">
-        <TopBar event={event} />
-        <div className="content">
-          {currentSection === 'yourPhotos' && <YourEventPhotos eventId={event.id} userId={user.uid} />}
-          {currentSection === 'uploadPhotos' && <UploadEventPhotos eventId={event.id} userId={user.uid} />}
-          {currentSection === 'favorites' && <Favorites eventId={event.id} userId={user.uid} />}
-          {currentSection === 'list' && <ListView eventId={event.id} userId={user.uid} />}
+      <div className="main-container">
+        <SideBar user={user} setCurrentSection={setCurrentSection} />
+        {isMobile && <DashboardNavBar user={user} setCurrentSection={setCurrentSection} />}
+        <div className="main-content">
+          <TopBar event={event} />
+          <div className="content">
+            {currentSection === 'yourPhotos' && <YourEventPhotos eventId={event.id} userId={user.uid} />}
+            {currentSection === 'uploadPhotos' && <UploadEventPhotos eventId={event.id} userId={user.uid} />}
+            {currentSection === 'favorites' && <Favorites eventId={event.id} userId={user.uid} />}
+            {currentSection === 'list' && <ListView eventId={event.id} userId={user.uid} />}
+          </div>
         </div>
       </div>
-    </div>
     </React.Fragment>
   );
 };

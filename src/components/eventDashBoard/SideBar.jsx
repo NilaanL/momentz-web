@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { Avatar, Button, IconButton, Drawer } from '@mui/material';
+import { Avatar, Button, IconButton, Drawer,useMediaQuery } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 import './SideBar.css';
 
 const GuestSidebar = ({ user, setCurrentSection }) => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const isMobile = useMediaQuery('(max-width:768px)');
 
   const toggleDrawer = (open) => (event) => {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
@@ -35,6 +36,7 @@ const GuestSidebar = ({ user, setCurrentSection }) => {
 
   return (
     <>
+    {/* {isMobile && (
       <IconButton
         edge="start"
         color="inherit"
@@ -44,6 +46,7 @@ const GuestSidebar = ({ user, setCurrentSection }) => {
       >
         <MenuIcon />
       </IconButton>
+    )} */}
       <Drawer
         anchor="left"
         open={isDrawerOpen}

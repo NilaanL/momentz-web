@@ -1,0 +1,72 @@
+[debug] [2024-08-02T01:15:34.559Z] ----------------------------------------------------------------------
+[debug] [2024-08-02T01:15:34.561Z] Command:       /opt/homebrew/Cellar/node/22.4.1/bin/node /opt/homebrew/bin/firebase init
+[debug] [2024-08-02T01:15:34.561Z] CLI Version:   13.15.0
+[debug] [2024-08-02T01:15:34.561Z] Platform:      darwin
+[debug] [2024-08-02T01:15:34.561Z] Node Version:  v22.4.1
+[debug] [2024-08-02T01:15:34.561Z] Time:          Fri Aug 02 2024 06:45:34 GMT+0530 (India Standard Time)
+[debug] [2024-08-02T01:15:34.561Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2024-08-02T01:15:34.597Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2024-08-02T01:15:34.598Z] > authorizing via signed-in user (thareejan@gmail.com)
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  /Users/r33j4n/momentZ-dev
+
+Before we get started, keep in mind:
+
+  * You are initializing within an existing Firebase project directory
+
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] but for now we'll just set up a default project.
+[info] 
+[debug] [2024-08-02T01:15:42.241Z] Using project from CLI flag: momentz-dev
+[debug] [2024-08-02T01:15:42.244Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/momentz-dev [none]
+[debug] [2024-08-02T01:15:43.032Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/momentz-dev 200
+[debug] [2024-08-02T01:15:43.032Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/momentz-dev {"projectId":"momentz-dev","projectNumber":"1057855363124","displayName":"momentz-dev","name":"projects/momentz-dev","resources":{"hostingSite":"momentz-dev","storageBucket":"momentz-dev.appspot.com","locationId":"us-central"},"state":"ACTIVE","etag":"1_d82f2419-c206-4210-ab4e-08a893ef80e1"}
+[info] i  Using project momentz-dev (momentz-dev) 
+[info] 
+=== Database Setup
+[info] i  database: ensuring required API firebasedatabase.googleapis.com is enabled... 
+[debug] [2024-08-02T01:15:43.041Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/momentz-dev/services/firebasedatabase.googleapis.com [none]
+[debug] [2024-08-02T01:15:43.041Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/momentz-dev/services/firebasedatabase.googleapis.com x-goog-quota-user=projects/momentz-dev
+[debug] [2024-08-02T01:15:44.969Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/momentz-dev/services/firebasedatabase.googleapis.com 200
+[debug] [2024-08-02T01:15:44.970Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/momentz-dev/services/firebasedatabase.googleapis.com [omitted]
+[warn] ⚠  database: missing required API firebasedatabase.googleapis.com. Enabling now... 
+[debug] [2024-08-02T01:15:44.972Z] >>> [apiv2][query] POST https://serviceusage.googleapis.com/v1/projects/momentz-dev/services/firebasedatabase.googleapis.com:enable [none]
+[debug] [2024-08-02T01:15:44.972Z] >>> [apiv2][(partial)header] POST https://serviceusage.googleapis.com/v1/projects/momentz-dev/services/firebasedatabase.googleapis.com:enable x-goog-quota-user=projects/momentz-dev
+[debug] [2024-08-02T01:15:45.536Z] <<< [apiv2][status] POST https://serviceusage.googleapis.com/v1/projects/momentz-dev/services/firebasedatabase.googleapis.com:enable 200
+[debug] [2024-08-02T01:15:45.537Z] <<< [apiv2][body] POST https://serviceusage.googleapis.com/v1/projects/momentz-dev/services/firebasedatabase.googleapis.com:enable [omitted]
+[debug] [2024-08-02T01:15:55.542Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/momentz-dev/services/firebasedatabase.googleapis.com [none]
+[debug] [2024-08-02T01:15:55.544Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/momentz-dev/services/firebasedatabase.googleapis.com x-goog-quota-user=projects/momentz-dev
+[debug] [2024-08-02T01:15:57.385Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/momentz-dev/services/firebasedatabase.googleapis.com 200
+[debug] [2024-08-02T01:15:57.385Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/momentz-dev/services/firebasedatabase.googleapis.com [omitted]
+[info] ✔  database: required API firebasedatabase.googleapis.com is enabled 
+[info] 
+[debug] [2024-08-02T01:15:57.392Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/momentz-dev [none]
+[debug] [2024-08-02T01:15:58.194Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/momentz-dev 200
+[debug] [2024-08-02T01:15:58.195Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/momentz-dev {"projectId":"momentz-dev","projectNumber":"1057855363124","displayName":"momentz-dev","name":"projects/momentz-dev","resources":{"hostingSite":"momentz-dev","storageBucket":"momentz-dev.appspot.com","locationId":"us-central"},"state":"ACTIVE","etag":"1_d82f2419-c206-4210-ab4e-08a893ef80e1"}
+[info] 
+[info] Firebase Realtime Database Security Rules allow you to define how your data should be
+[info] structured and when your data can be read from and written to.
+[info] 
+[info] ✔  Default rules have been written to database.rules.json. 
+[info] Future modifications to database.rules.json will update Realtime Database Security Rules when you run
+[info] firebase deploy.
+[info] 
+=== Firestore Setup
+[debug] [2024-08-02T01:23:04.491Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/momentz-dev/services/firestore.googleapis.com [none]
+[debug] [2024-08-02T01:23:04.492Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/momentz-dev/services/firestore.googleapis.com x-goog-quota-user=projects/momentz-dev
+[debug] [2024-08-02T01:23:06.214Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/momentz-dev/services/firestore.googleapis.com 200
+[debug] [2024-08-02T01:23:06.214Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/momentz-dev/services/firestore.googleapis.com [omitted]
+[debug] [2024-08-02T01:23:06.215Z] >>> [apiv2][query] GET https://firestore.googleapis.com/v1/projects/momentz-dev/databases/(default) [none]
