@@ -23,12 +23,12 @@ const CameraCapture = ({ onCapture }) => {
   return (
     <div>
       {isCameraOn ? (
-        <div>
+        <div className='join-event-camera-container'>
           <video ref={videoRef} autoPlay></video>
-          <button onClick={capturePhoto}>Capture Photo</button>
+          <button className='join-event-use-camera-button' onClick={capturePhoto}>Capture Photo</button>
         </div>
       ) : (
-        <button onClick={startCamera}>Start Camera</button>
+        <button className='join-event-use-camera-button' onClick={startCamera}><i class="fa fa-camera" aria-hidden="true"></i> { }Use Camera</button>
       )}
     </div>
   );

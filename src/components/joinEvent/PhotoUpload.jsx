@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { db, storage } from './../../dbConfig/firebase'; // Add storage import
-import { ref, uploadBytes, getDownloadURL } from 'firebase/storage'; // Add Firebase storage functions
-import { doc, updateDoc, arrayUnion } from 'firebase/firestore';
-import { Box, Button, Typography, CircularProgress } from '@mui/material';
-import CameraCapture from './CameraCapture'; // Import the new CameraCapture component
-
+import React, { useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { db, storage } from "./../../dbConfig/firebase";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { doc, updateDoc, arrayUnion } from "firebase/firestore";
+import CameraCapture from "./CameraCapture";
+import "./PhotoUpload.css";
+import uploadPhoto from "./uploadPhoto.png";
 const PhotoUpload = () => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -23,66 +23,88 @@ const PhotoUpload = () => {
     setCameraPhotos((prevPhotos) => [...prevPhotos, dataUrl]);
   };
 
-// Inside handleUpload function in PhotoUpload component
-
-const handleUpload = async () => {
-  const totalPhotos = files.length + cameraPhotos.length;
-  if (totalPhotos < 3) {
-    setError('Please upload or capture at least 3 photos.');
-    return;
-  }
-
-  setIsLoading(true);
-  setError(null);
-
-  const uploadedUrls = [];
-  try {
-    for (const file of files) {
-      const storageRef = ref(storage, `events/${eventId}/attendees/${userId}/${file.name}`);
-      await uploadBytes(storageRef, file);
-      const downloadURL = await getDownloadURL(storageRef);
-      uploadedUrls.push(downloadURL);
+  const handleUpload = async () => {
+    const totalPhotos = files.length + cameraPhotos.length;
+    if (totalPhotos < 3) {
+      setError("Please upload or capture at least 3 photos.");
+      return;
     }
 
-    for (const [index, dataUrl] of cameraPhotos.entries()) {
-      const blob = await (await fetch(dataUrl)).blob();
-      const storageRef = ref(storage, `events/${eventId}/attendees/${userId}/camera-photo-${index}.png`);
-      await uploadBytes(storageRef, blob);
-      const downloadURL = await getDownloadURL(storageRef);
-      uploadedUrls.push(downloadURL);
+    setIsLoading(true);
+    setError(null);
+
+    const uploadedUrls = [];
+    try {
+      for (const file of files) {
+        const storageRef = ref(
+          storage,
+          `events/${eventId}/attendees/${userId}/${file.name}`
+        );
+        await uploadBytes(storageRef, file);
+        const downloadURL = await getDownloadURL(storageRef);
+        uploadedUrls.push(downloadURL);
+      }
+
+      for (const [index, dataUrl] of cameraPhotos.entries()) {
+        const blob = await (await fetch(dataUrl)).blob();
+        const storageRef = ref(
+          storage,
+          `events/${eventId}/attendees/${userId}/camera-photo-${index}.png`
+        );
+        await uploadBytes(storageRef, blob);
+        const downloadURL = await getDownloadURL(storageRef);
+        uploadedUrls.push(downloadURL);
+      }
+
+      const attendeeRef = doc(db, "Events", eventId, "Event_Attendees", userId);
+      await updateDoc(attendeeRef, {
+        photos: arrayUnion(...uploadedUrls),
+      });
+
+      navigate("/event-confirmation", { state: { eventId, userId } });
+    } catch (err) {
+      console.error("Error uploading photos: ", err);
+      setError("An error occurred while uploading photos.");
+    } finally {
+      setIsLoading(false);
     }
-
-    const attendeeRef = doc(db, 'Events', eventId, 'Event_Attendees', userId);
-    await updateDoc(attendeeRef, {
-      photos: arrayUnion(...uploadedUrls)
-    });
-
-    navigate('/event-confirmation', { state: { eventId, userId } });
-  } catch (err) {
-    console.error('Error uploading photos: ', err);
-    setError('An error occurred while uploading photos.');
-  } finally {
-    setIsLoading(false);
-  }
-};
-
+  };
 
   return (
-    <Box sx={{ mt: 5, textAlign: 'center' }}>
-      <Typography variant="h4" component="h1" gutterBottom>
-        Upload Photos
-      </Typography>
-      <input type="file" multiple onChange={handleFileChange} />
-      <CameraCapture onCapture={handleCameraCapture} />
-      {isLoading ? (
-        <CircularProgress />
-      ) : (
-        <Button variant="contained" color="primary" onClick={handleUpload}>
-          Upload Photos
-        </Button>
-      )}
-      {error && <Typography color="error">{error}</Typography>}
-    </Box>
+    <div className="upload-photo-join-event-container">
+      <div className="upload-photo-join-event">
+        <span className="upload-photo-join-event-title">
+          Your face, your key! <br /> Upload three photos <br /> To unlock face
+          recognition
+        </span>
+        <CameraCapture onCapture={handleCameraCapture} />
+        <div className="join-event-upload-photo-line-container">
+          <div className="join-event-upload-photo-line"></div>
+          <span className="join-event-upload-photo-center-text-or">OR</span>
+          <div className="join-event-upload-photo-line"></div>
+        </div>
+        <input
+          className="join-event-upload-photo-choose-file"
+          type="file"
+          multiple
+          onChange={handleFileChange}
+        />
+        {isLoading ? (
+          <div className="loading">Loading...</div>
+        ) : (
+          <button
+            onClick={handleUpload}
+            className="join-event-upload-photos-button"
+          >
+            Upload Photos
+          </button>
+        )}
+        {error && <div className="error">{error}</div>}
+      </div>
+      <div className="upload-photo-join-event-image-container">
+        <img src={uploadPhoto} alt="uploadPhoto" />
+      </div>
+    </div>
   );
 };
 

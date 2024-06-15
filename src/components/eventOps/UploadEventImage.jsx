@@ -38,7 +38,7 @@ function UploadEventImage({ onImageUpload }) {
 
   return (
     <div className="create-event-image-uploader">
-      <label className="choose-image-button">
+      <label>
         {/* Choose Image */}
         <input type="file" hidden onChange={handleChange} className='choose-file-input-type'/>
       </label>

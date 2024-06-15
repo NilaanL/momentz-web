@@ -1,0 +1,125 @@
+.upload-photo-join-event-container{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-content: center;
+    padding: 10px 30px;
+    /* background-color: #b6f9f8; */
+    height: 100vh;
+    overflow-y: auto;
+}
+
+.upload-photo-join-event{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    padding-left: 40px;
+}
+
+.upload-photo-join-event-title{
+    font-size: 35px;
+    font-weight: 600;
+    color: #155456;
+    /* padding-top: 80px; */
+    line-height: 50px;
+}
+
+/* Existing CSS */
+.join-event-use-camera-button {
+    background-color: #006D77;
+    color: #fff;
+    width: 240px;
+    height: 45px;
+    border-radius: 20px;
+    font-size: 24px;
+    font-weight: 600;
+    transition: transform 0.2s ease-in-out, background-color 0.2s ease-in-out;
+}
+
+/* Keyframe for in-and-out effect */
+@keyframes pop {
+    0%, 100% {
+        transform: scale(1);
+        background-color: #006D77;
+    }
+    50% {
+        transform: scale(0.9);
+        background-color: #004C57;
+    }
+}
+
+/* Apply animation on button active state */
+.join-event-use-camera-button:active {
+    animation: pop 0.5s ease-in-out;
+}
+
+
+.join-event-upload-photo-center-text-or {
+    font-size: 30px;
+    font-weight: 400;
+    color: #007074;
+    margin: 0 25px;
+  }
+  
+  .join-event-upload-photo-line {
+    flex-grow: 1;
+    height: 2px;
+    background-color: #007074;
+  }
+  
+  .join-event-upload-photo-line-container {
+    display: flex;
+    align-items: center;
+    width: 400px;
+  }
+
+  input.join-event-upload-photo-choose-file[type="file"] {
+    display: flex; 
+    padding: 10px;
+    border: 2px solid #ccc; 
+    border-radius: 10px; 
+    font-size: 16px; 
+    cursor: pointer; 
+    background-color: #006D77;
+    color: #fff;
+}
+
+.join-event-upload-photos-button {
+    background-color: #006D77;
+    width: 250px;
+    height: 50px;
+    color: #fff;
+    font-size: 26px;
+    font-weight: 600;
+    border-radius: 10px;
+}
+  
+.upload-photo-join-event-image-container img {
+    width: 480px;
+    height: auto;
+    position: absolute;
+    top: 20vh;
+    left: 9vw;
+}
+
+.upload-photo-join-event-image-container {
+    position: relative;
+}
+
+.join-event-camera-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+@media all and (max-width: 1200px) {
+    .upload-photo-join-event-image-container img {
+        display: none;
+    }
+
+    .upload-photo-join-event-container {
+        display: flex;
+    }
+}

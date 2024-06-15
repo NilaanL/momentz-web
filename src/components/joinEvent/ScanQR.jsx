@@ -5,7 +5,7 @@ import { doc, setDoc, serverTimestamp } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import React from "react";
 import "./ScanQR.css"; // Import the CSS file
-import joinEventImage from "./qrblue.jpg";
+import joinEventImage from "./scanqr.jfif";
 import svgOne from "./svgviewer-output.png";
 import svgTwo from "./svgviewer-output-two.png";
 
@@ -70,13 +70,7 @@ const ScanQR = () => {
   return (
     <div className="join-event-container">
      
-      <div className="join-event-image-container">
-        <img
-          src={joinEventImage}
-          alt="joinEvent"
-          className="join-event-image"
-        />
-      </div>
+    
       <div className="join-event-text-container">
       <div className="join-event-svg-one">
         <img src={svgOne} alt="svgOne" className="join-event-svg-one" />
@@ -98,30 +92,33 @@ const ScanQR = () => {
         ) : (
           <div className="join-event-bottom">
             <div id="join-event-reader" className="join-event-qr-reader"></div>
-            <div className="join-event-line-container">
-              <div className="join-event-line"></div>
-              <span className="join-event-center-text-or">OR</span>
-              <div className="join-event-line"></div>
-            </div>
-            <span className="join-event-center-text">Enter the Event ID</span>
+            {/* <span className="join-event-center-text">Enter the Event ID</span> */}
             <div className="join-event-center-input">
               <input
                 type="text"
                 value={manualSerialNumber}
                 onChange={handleManualSerialNumberChange}
                 className="join-event-manual-input"
+                placeholder="Scan QR or Enter Event ID"
               />
               <button
                 onClick={() => handleJoinEvent(manualSerialNumber)}
                 disabled={isLoading}
                 className="join-event-join-button"
               >
-                Join Event
+                Join
               </button>
             </div>
           </div>
         )}
         {error && <p className="join-event-error-text">{error}</p>}
+      </div>
+      <div className="join-event-image-container">
+        <img
+          src={joinEventImage}
+          alt="joinEvent"
+          className="join-event-image"
+        />
       </div>
     </div>
   );
