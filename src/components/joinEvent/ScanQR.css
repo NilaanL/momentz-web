@@ -197,6 +197,49 @@ img[alt="Info icon"] {
   display: none;
 }
 
+@media all and (max-width: 1100px) {
+  .join-event-image {
+    display: none;
+  }
+
+  .join-event-container {
+    display: flex;
+    justify-content: center;
+  }
+
+  .join-event-bottom {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .join-event-heading {
+    text-align: center;
+    margin: 0;
+  }
+
+  .join-event-bottom {
+    gap: 50px;
+  }
+
+  .join-event-text-container {
+    padding: 0;
+  }
+
+  #html5-qrcode-button-camera-stop {
+    margin-left: 0;
+  }
+
+  .join-event-center-input {
+    flex-direction: column;
+    
+  }
+}
+
+@media all and (max-width: 450px) {
+  .join-event-heading {
+    font-size: 30px;
+  }
+}
 
 /* #join-event-reader__header_message {
     position: absolute;
