@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { storage } from '../../dbConfig/firebase';
-import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
-import './UploadEventImage.css'; // Import the CSS file
+import React, { useState } from "react";
+import { storage } from "../../dbConfig/firebase";
+import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
+import "./UploadEventImage.css"; // Import the CSS file
 
 function UploadEventImage({ onImageUpload }) {
   const [image, setImage] = useState(null);
@@ -22,9 +22,11 @@ function UploadEventImage({ onImageUpload }) {
     const uploadTask = uploadBytesResumable(storageRef, image);
 
     uploadTask.on(
-      'state_changed',
+      "state_changed",
       (snapshot) => {
-        const prog = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
+        const prog = Math.round(
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+        );
         setProgress(prog);
       },
       (error) => console.log(error),
@@ -40,8 +42,14 @@ function UploadEventImage({ onImageUpload }) {
     <div className="create-event-image-uploader">
       <label>
         {/* Choose Image */}
-        <input type="file" hidden onChange={handleChange} className='choose-file-input-type'/>
+        <input
+          type="file"
+          hidden
+          onChange={handleChange}
+          className="choose-file-input-type"
+        />
       </label>
+      <div className="upload-button-and-percentage">
       <button
         className="upload-button"
         onClick={handleUpload}
@@ -52,9 +60,10 @@ function UploadEventImage({ onImageUpload }) {
       {progress > 0 && (
         <div className="progress-bar">
           <progress value={progress} max="100"></progress>
-          <span>{`Uploaded ${progress}%`}</span>
+          <span className="progress-text">{`${progress}%`}</span>
         </div>
       )}
+      </div>
     </div>
   );
 }

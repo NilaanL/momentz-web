@@ -1,6 +1,6 @@
-import React from 'react';
-import { useLocation } from 'react-router-dom';
-import { Container, Typography, Box, Button } from '@mui/material';
+import React from "react";
+import { useLocation } from "react-router-dom";
+import "./EventDetails.css";
 
 const EventDetails = () => {
   const location = useLocation();
@@ -11,16 +11,16 @@ const EventDetails = () => {
     startDate,
     endDate,
     qrCodeUrl,
-    eventImageUrl
+    eventImageUrl,
   } = location.state;
 
   const downloadQR = () => {
     fetch(qrCodeUrl)
       .then((response) => response.blob())
       .then((blob) => {
-        const link = document.createElement('a');
+        const link = document.createElement("a");
         link.href = URL.createObjectURL(blob);
-        link.setAttribute('download', `qrcode-${eventId}.png`);
+        link.setAttribute("download", `qrcode-${eventId}.png`);
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
@@ -28,34 +28,45 @@ const EventDetails = () => {
   };
 
   return (
-    <Container maxWidth="sm">
-      <Box sx={{ mt: 5, textAlign: 'center' }}>
-        <Typography variant="h4" component="h1" gutterBottom>
-          Event Created Successfully
-        </Typography>
-        <Typography variant="h5" component="h2" gutterBottom>
-          {eventName}
-        </Typography>
-        <Typography variant="body1" gutterBottom>
-          {description}
-        </Typography>
-        <Typography variant="body2" gutterBottom>
-          Starts on: {new Date(startDate).toLocaleString()}
-        </Typography>
-        <Typography variant="body2" gutterBottom>
-          Ends on: {endDate ? new Date(endDate).toLocaleString() : 'N/A'}
-        </Typography>
-        {eventImageUrl && <img src={eventImageUrl} alt="Event" width="100%" />}
-        <Box sx={{ mt: 3 }}>
-          <img src={qrCodeUrl} alt="QR Code" />
-          <Box sx={{ mt: 2 }}>
-            <Button variant="contained" color="primary" onClick={downloadQR}>
-              Download QR Code
-            </Button>
-          </Box>
-        </Box>
-      </Box>
-    </Container>
+    <div className="event-details-container">
+      <div className="event-details-top-color"></div>
+      <div className="event-details-box">
+        {/* <h1 className="event-details-title">Event Created Successfully</h1> */}
+
+        <div className="event-details-left-box">
+          {eventImageUrl && (
+            <img
+              src={eventImageUrl}
+              alt="Event"
+              className="event-details-image"
+            />
+          )}
+          <p className="event-details-start-date">
+            <strong>Starts on:</strong> <br />
+            {new Date(startDate).toLocaleString()}
+          </p>
+          <p className="event-details-end-date">
+            <strong> Ends on: </strong>
+            <br />
+            {endDate ? new Date(endDate).toLocaleString() : "N/A"}
+          </p>
+        </div>
+        <div className="event-details-right-box">
+          <div className="event-details-name-description-box">
+            <h2 className="event-details-name">{eventName}</h2>
+            <p className="event-details-description">{description}</p>
+          </div>
+          <img
+            src={qrCodeUrl}
+            alt="QR Code"
+            className="event-details-qr-code"
+          />
+          <button className="event-details-button" onClick={downloadQR}>
+            Download QR Code
+          </button>
+        </div>
+      </div>
+    </div>
   );
 };
 
