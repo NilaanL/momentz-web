@@ -1,11 +1,9 @@
 import React from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import GenQR from "../components/GenQR/GenQR";
-import App from "../App";
 import ScanQR from "../components/joinEvent/ScanQR";
 import GoogleAuth from "../components/googleAuth/GoogleAuth";
 import GetAllEventApp from "../components/eventOps/GetAllEvent";
-import CreateEvent from "../components/eventOps/CreateNewEvent";
 import MyEvents from "../components/eventOps/ListMyEvent";
 import EditEvent from "../components/eventOps/EditEvent";
 import EventDetails from "../components/eventOps/EventDetails";
