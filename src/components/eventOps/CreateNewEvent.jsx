@@ -109,6 +109,7 @@ function CreateEvent() {
                 <input
                   type="text"
                   id="eventName"
+                  placeholder="Enter event name"
                   className="create-event-form-control"
                   value={eventName}
                   onChange={(e) => setEventName(e.target.value)}
@@ -121,6 +122,7 @@ function CreateEvent() {
                 </label>
                 <textarea
                   id="description"
+                  placeholder="Enter event description"
                   className="create-event-form-control"
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}

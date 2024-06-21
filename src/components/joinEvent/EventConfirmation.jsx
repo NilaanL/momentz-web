@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { db } from './../../dbConfig/firebase';
-import { doc, getDoc } from 'firebase/firestore';
-import { Box, Container, Typography, Grid, Paper } from '@mui/material';
+import React, { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { db } from "./../../dbConfig/firebase";
+import { doc, getDoc } from "firebase/firestore";
+import "./EventConfirmation.css";
+import eventPng from "./eventConfirmation.png";
 
 const EventConfirmation = () => {
   const location = useLocation();
@@ -17,17 +18,19 @@ const EventConfirmation = () => {
     const fetchDetails = async () => {
       setLoading(true);
       try {
-        const eventDoc = await getDoc(doc(db, 'Events', eventId));
-        const userDoc = await getDoc(doc(db, 'Events', eventId, 'Event_Attendees', userId));
-        
+        const eventDoc = await getDoc(doc(db, "Events", eventId));
+        const userDoc = await getDoc(
+          doc(db, "Events", eventId, "Event_Attendees", userId)
+        );
+
         if (eventDoc.exists() && userDoc.exists()) {
           setEventDetails(eventDoc.data());
           setUserDetails(userDoc.data());
         } else {
-          setError('Event or user not found.');
+          setError("Event or user not found.");
         }
       } catch (err) {
-        setError('An error occurred while fetching the details.');
+        setError("An error occurred while fetching the details.");
         console.error(err);
       } finally {
         setLoading(false);
@@ -38,54 +41,82 @@ const EventConfirmation = () => {
   }, [eventId, userId]);
 
   if (loading) {
-    return <Typography>Loading...</Typography>;
+    return <span className="event-confirmation-loading">Loading...</span>;
   }
 
   if (error) {
-    return <Typography color="error">{error}</Typography>;
+    return <span className="event-confirmation-error">{error}</span>;
   }
-  
+
   const handleClick = () => {
-    localStorage.setItem('eventId', eventId);
-    localStorage.setItem('userId', userId);
-    navigate('/event-dashboard');
+    localStorage.setItem("eventId", eventId);
+    localStorage.setItem("userId", userId);
+    navigate("/event-dashboard");
   };
 
   return (
-    <Container maxWidth="md">
-      <Box sx={{ mt: 5 }}>
-        <Typography variant="h4" component="h1" gutterBottom>
-          Event Confirmation
-        </Typography>
-        {eventDetails && userDetails && (
-          <Paper elevation={3} sx={{ p: 3 }}>
-            <Grid container spacing={2}>
-              <Grid item xs={12} md={6}>
-                <img src={eventDetails.image_url} alt="Event" style={{ width: '100%', height: 'auto' }} />
-              </Grid>
-              <Grid item xs={12} md={6}>
-                <Typography variant="h5">{eventDetails.name}</Typography>
-                <Typography variant="body1"><strong>Event ID:</strong> {eventDetails.id}</Typography>
-                <Typography variant="body1"><strong>Start Date:</strong> {eventDetails.start_date.toDate().toLocaleString()}</Typography>
-                <Typography variant="body1"><strong>End Date:</strong> {eventDetails.end_date ? eventDetails.end_date.toDate().toLocaleString() : 'N/A'}</Typography>
-                <Typography variant="h6" sx={{ mt: 2 }}>User Details</Typography>
-                <Typography variant="body1"><strong>User ID:</strong> {userId}</Typography>
-                <Typography variant="body1"><strong>Join Date:</strong> {userDetails.join_date.toDate().toLocaleString()}</Typography>
-                <Typography variant="h6" sx={{ mt: 2 }}>Uploaded Photos</Typography>
-                <Grid container spacing={2}>
-                  {userDetails.photos && userDetails.photos.map((url, index) => (
-                    <Grid item xs={4} key={index}>
-                      <img src={url} alt={`User Photo ${index + 1}`} style={{ width: '100%', height: 'auto' }} />
-                    </Grid>
-                  ))}
-                </Grid>
-                <button onClick={handleClick}>Go to Event Dashboard</button>
-              </Grid>
-            </Grid>
-          </Paper>
-        )}
-      </Box>
-    </Container>
+    <div className="event-confirmation-container">
+      <div className="event-confirmation-header-container">
+        <div className="event-confirmation-header">
+          <span className="event-confirmation-title">{eventDetails.name}</span>
+          <span className="event-confirmation-description">
+            Let's keep the birthday spirit alive and celebrate the beautiful
+            memories we created together!
+          </span>
+          <button className="event-confirmation-button" onClick={handleClick}>
+            Go to event dashboard
+          </button>
+        </div>
+        <div className="event-confirmation-png">
+          <img src={eventPng} alt="png" />
+        </div>
+      </div>
+
+      <div className="event-confirmation-twitter-post">
+        <div className="event-confirmation-post-content-one">
+          <div className="event-confirmation-event-image">
+            <img src={eventDetails.image_url} alt="Event" />
+          </div>
+          <div className="event-confirmation-event-info">
+            <span className="event-confirmation-subtitle">Join Us</span>
+            <div className="event-confirmation-detail">
+              <strong>From:</strong><br/>{" "}
+              {eventDetails.start_date.toDate().toLocaleString()}
+            </div>
+            <div className="event-confirmation-detail">
+              <strong>To:</strong><br/>{" "}
+              {eventDetails.end_date
+                ? eventDetails.end_date.toDate().toLocaleString()
+                : "N/A"}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="event-confirmation-twitter-post">
+        <div className="event-confirmation-post-content-two">
+          <div className="event-confirmation-user-info">
+            <div className="event-confirmation-detail">
+              <strong>User ID:</strong><br/> {userId}
+            </div>
+            <div className="event-confirmation-detail">
+              <strong>Joined Date:</strong><br/>{" "}
+              {userDetails.join_date.toDate().toLocaleString()}
+            </div>
+          </div>
+          <div className="event-confirmation-user-photos-container">
+            <div className="event-confirmation-user-photos">
+              {userDetails.photos &&
+                userDetails.photos.map((url, index) => (
+                  <div className="event-confirmation-photo" key={index}>
+                    <img src={url} alt={`User ${index + 1}`} />
+                  </div>
+                ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
 
