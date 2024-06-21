@@ -13,6 +13,7 @@ import PhotoUpload from "../components/joinEvent/PhotoUpload";
 import EventConfirmation from "../components/joinEvent/EventConfirmation";
 import EventDashboard from "../components/eventDashBoard/EventDashBoard";
 import HomePage from "../Pages/Homepage";
+import CreateEventPage from "../Pages/CreateEventPage";
 
 const router = createBrowserRouter([
   { path: "/", element: <App />},
@@ -21,7 +22,7 @@ const router = createBrowserRouter([
   { path: "/joinEvent", element: <ScanQR/> },
   { path: "/login", element: <GoogleAuth/> },
   { path: "/getAllevent", element: <GetAllEventApp/> },
-  { path: "/createEvent", element: <CreateEvent/> },
+  { path: "/createEvent", element: <CreateEventPage/> },
   { path: "/myEvents", element: <MyEvents/> },
   { path: "/edit-event/:eventId", element: <EditEvent/> },
   { path: "/event-details", element: <EventDetails/> },
