@@ -9,6 +9,10 @@
     box-sizing: border-box;
   } */
 
+.event-details-container {
+  height: 100vh;
+}
+
 .event-details-top-color {
   width: 100vw;
   height: 200px;
@@ -135,9 +139,14 @@
     padding-top: 20px;
   }
 
-    .event-details-description {
-        font-size: 30px;
-    }
+  .event-details-description {
+      font-size: 30px;
+  }
+
+  .event-details-date-duration {
+    display: flex;
+    gap: 20px;
+  }
 }
 
 @media all and (max-width: 650px) {
@@ -151,5 +160,9 @@
 
     .event-details-description {
       font-size: 25px;
+    }
+
+    .event-details-date-duration {
+      flex-direction: column;
     }
 }
