@@ -1,7 +1,7 @@
-import { auth, googleProvider } from "../../dbConfig/firebase";
+import { auth, googleProvider, appleProvider } from "../../dbConfig/firebase"; // Ensure appleProvider is imported
 import { signInWithPopup, signOut } from "firebase/auth";
 import { useState } from "react";
-import "./GoogleAuth.css"; // Import the CSS file for styling
+import "./GoogleAuth.css";
 import CreateUserDocument from "../userOps/CreateUserDoc";
 import signInImage from "./sign in image.png";
 import googleSignUpLogo from "./google sign up button.png";
@@ -14,7 +14,17 @@ const GoogleAuth = () => {
     try {
       const result = await signInWithPopup(auth, googleProvider);
       console.log(result);
-      // Store username in local storage
+      const username = result.user.displayName || result.user.email;
+      localStorage.setItem("username", username);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const signInWithApple = async () => {
+    try {
+      const result = await signInWithPopup(auth, appleProvider);
+      console.log(result);
       const username = result.user.displayName || result.user.email;
       localStorage.setItem("username", username);
     } catch (error) {
@@ -26,7 +36,7 @@ const GoogleAuth = () => {
     try {
       await signOut(auth);
       console.log("User signed out");
-      localStorage.removeItem("username"); // Optionally remove username from local storage
+      localStorage.removeItem("username");
     } catch (error) {
       console.log(error);
     }
