@@ -34,7 +34,7 @@ const GoogleAuth = () => {
     try {
       await signOut(auth);
       console.log("User signed out");
-      localStorage.removeItem("username"); // Optionally remove username from local storage
+      localStorage.removeItem("username");
     } catch (error) {
       console.log(error);
     }
