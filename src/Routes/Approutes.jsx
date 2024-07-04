@@ -16,7 +16,7 @@ import HomePage from "../Pages/Homepage";
 import CreateEventPage from "../Pages/CreateEventPage";
 
 const router = createBrowserRouter([
-  { path: "/", element: <App />},
+  { path: "/", element: <HomePage />},
   { path:"/home", element: <HomePage/>},
   { path: "/genQR", element: <GenQR /> },
   { path: "/joinEvent", element: <ScanQR/> },
@@ -27,8 +27,8 @@ const router = createBrowserRouter([
   { path: "/edit-event/:eventId", element: <EditEvent/> },
   { path: "/event-details", element: <EventDetails/> },
   { path: "/upload-photos", element: <PhotoUpload/> },
-  {path:"/event-confirmation", element:<EventConfirmation/>},
-  {path:"/event-dashboard", element:<EventDashboard/>}
+  { path:"/event-confirmation", element:<EventConfirmation/>},
+  { path:"/event-dashboard", element:<EventDashboard/>}
 
 ]);
 
