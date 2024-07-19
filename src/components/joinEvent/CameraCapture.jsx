@@ -1,8 +1,25 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect, forwardRef, useImperativeHandle } from 'react';
 
-const CameraCapture = ({ onCapture }) => {
+const CameraCapture = forwardRef(({ onCapture, photoCount }, ref) => {
   const videoRef = useRef(null);
   const [isCameraOn, setIsCameraOn] = useState(false);
+
+  useImperativeHandle(ref, () => ({
+    stopCamera() {
+      if (videoRef.current && videoRef.current.srcObject) {
+        videoRef.current.srcObject.getTracks().forEach(track => track.stop());
+      }
+      setIsCameraOn(false);
+    }
+  }));
+
+  useEffect(() => {
+    return () => {
+      if (videoRef.current && videoRef.current.srcObject) {
+        videoRef.current.srcObject.getTracks().forEach(track => track.stop());
+      }
+    };
+  }, []);
 
   const startCamera = async () => {
     setIsCameraOn(true);
@@ -25,13 +42,21 @@ const CameraCapture = ({ onCapture }) => {
       {isCameraOn ? (
         <div className='join-event-camera-container'>
           <video ref={videoRef} autoPlay></video>
-          <button className='join-event-use-camera-button' onClick={capturePhoto}>Capture Photo</button>
+          <button className='join-event-use-camera-button' onClick={capturePhoto}>
+            Capture Photo
+          </button>
+          <button className='join-event-use-camera-button' onClick={() => ref.current.stopCamera()}>
+            Stop Camera
+          </button>
+          <div>Photos Taken: {photoCount}</div>
         </div>
       ) : (
-        <button className='join-event-use-camera-button' onClick={startCamera}><i class="fa fa-camera" aria-hidden="true"></i> { }Use Camera</button>
+        <button className='join-event-use-camera-button' onClick={startCamera}>
+          <i className="fa fa-camera" aria-hidden="true"></i> Use Camera
+        </button>
       )}
     </div>
   );
-};
+});
 
 export default CameraCapture;

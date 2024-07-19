@@ -1,0 +1,102 @@
+.upload-event-photos-container {
+    padding: 20px;
+  }
+  
+  .photos-grid {
+    margin-top: 20px;
+  }
+  
+  .photo-item {
+    position: relative;
+    cursor: pointer;
+  }
+  
+  .photo-wrapper {
+    position: relative;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  .photo-wrapper.selected {
+    border-color: #013220;
+  }
+  
+  .photo-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 8px;
+  }
+  
+  .favorite-icon {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 50%;
+  }
+  
+  .delete-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 50%;
+  }
+  
+  .upload-button,
+  .delete-button {
+    background-color: #013220;
+    color: white;
+  }
+  
+  .upload-button:hover,
+  .delete-button:hover {
+    background-color: #014c33;
+  }
+  
+  .photo-actions {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  
+  .upload-modal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .upload-modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    text-align: center;
+  }
+  
+  .upload-modal-content input {
+    margin: 20px 0;
+  }
+  
+  @media (max-width: 768px) {
+    .upload-event-photos-container {
+      padding: 10px;
+    }
+  
+    .upload-modal-content {
+      width: 90%;
+    }
+  
+    .photos-grid {
+      margin-top: 10px;
+    }
+  
+    .photo-actions {
+      flex-direction: column;
+      gap: 5px;
+    }
+  }

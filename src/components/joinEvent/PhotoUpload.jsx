@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { db, storage } from "./../../dbConfig/firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
@@ -6,6 +6,7 @@ import { doc, updateDoc, arrayUnion } from "firebase/firestore";
 import CameraCapture from "./CameraCapture";
 import "./PhotoUpload.css";
 import uploadPhoto from "./uploadPhoto.png";
+
 const PhotoUpload = () => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -14,6 +15,7 @@ const PhotoUpload = () => {
   const [cameraPhotos, setCameraPhotos] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+  const cameraRef = useRef();
 
   const handleFileChange = (e) => {
     setFiles(e.target.files);
@@ -61,6 +63,7 @@ const PhotoUpload = () => {
         photos: arrayUnion(...uploadedUrls),
       });
 
+      cameraRef.current.stopCamera(); // Stop the camera
       navigate("/event-confirmation", { state: { eventId, userId } });
     } catch (err) {
       console.error("Error uploading photos: ", err);
@@ -77,7 +80,7 @@ const PhotoUpload = () => {
           Your face, your key! <br /> Upload three photos <br /> To unlock face
           recognition
         </span>
-        <CameraCapture onCapture={handleCameraCapture} />
+        <CameraCapture ref={cameraRef} onCapture={handleCameraCapture} photoCount={cameraPhotos.length} />
         <div className="join-event-upload-photo-line-container">
           <div className="join-event-upload-photo-line"></div>
           <span className="join-event-upload-photo-center-text-or">OR</span>

@@ -3,7 +3,9 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import Modal from 'react-modal';
 import AppRoutes from './Routes/Approutes';
+Modal.setAppElement('#root');
 
 ReactDOM.render(
   <React.StrictMode>

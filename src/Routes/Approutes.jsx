@@ -14,6 +14,8 @@ import EventConfirmation from "../components/joinEvent/EventConfirmation";
 import EventDashboard from "../components/eventDashBoard/EventDashBoard";
 import HomePage from "../Pages/Homepage";
 import CreateEventPage from "../Pages/CreateEventPage";
+import MainComponent from "../components/eventDashBoard/MainComponent";
+import GuestDashBoard from "../components/eventDashBoard/GuestDashboard";
 
 const router = createBrowserRouter([
   { path: "/", element: <HomePage />},
@@ -28,7 +30,8 @@ const router = createBrowserRouter([
   { path: "/event-details", element: <EventDetails/> },
   { path: "/upload-photos", element: <PhotoUpload/> },
   { path:"/event-confirmation", element:<EventConfirmation/>},
-  { path:"/event-dashboard", element:<EventDashboard/>}
+  { path:"/event-dashboard", element:<EventDashboard/>},
+  { path:"/guest-dashboard", element:<GuestDashBoard/>}
 
 ]);
 
