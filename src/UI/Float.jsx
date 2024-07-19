@@ -11,9 +11,11 @@ const FloatContent = () => {
                 Automate and simplify photo sharing for your events. <br/>
 Let AI do the work!
                 </div>
+                <a href="#join" className="page-scroll">
                 <div className="button_join">
                 Start sharing memories
                 </div>
+                </a>
                 
             </div>
             <div className="right">
