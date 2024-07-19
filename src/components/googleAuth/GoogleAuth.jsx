@@ -3,6 +3,8 @@ import { signInWithPopup, signOut } from "firebase/auth";
 import { useState } from "react";
 import "./GoogleAuth.css";
 import CreateUserDocument from "../userOps/CreateUserDoc";
+import signInImage from "./sign in image.png";
+import googleSignUpLogo from "./google sign up button.png";
 
 const GoogleAuth = () => {
   const [email, setEmail] = useState("");
@@ -40,6 +42,8 @@ const GoogleAuth = () => {
     }
   };
 
+
+
   return (
     <div className="auth-container">
       <input
@@ -53,13 +57,12 @@ const GoogleAuth = () => {
         onChange={(e) => setPassword(e.target.value)}
         className="auth-input"
       />
+
       <button onClick={signInWithGoogle} className="auth-button">
         Sign In With Google
       </button>
-      <button onClick={signInWithApple} className="auth-button">
-        Sign In With Apple
-      </button>
-      <CreateUserDocument />
+      <CreateUserDocument/>
+
       <button onClick={signOutWithGoogle} className="auth-button">
         Logout
       </button>

@@ -41,6 +41,7 @@ const EventDetails = () => {
               className="event-details-image"
             />
           )}
+          <div className="event-details-date-duration">
           <p className="event-details-start-date">
             <strong>Starts on:</strong> <br />
             {new Date(startDate).toLocaleString()}
@@ -50,6 +51,7 @@ const EventDetails = () => {
             <br />
             {endDate ? new Date(endDate).toLocaleString() : "N/A"}
           </p>
+          </div>
         </div>
         <div className="event-details-right-box">
           <div className="event-details-name-description-box">
