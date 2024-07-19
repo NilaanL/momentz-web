@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { auth, db } from './../../dbConfig/firebase';
 import { doc, getDoc } from 'firebase/firestore';
-import { onAuthStateChanged } from "firebase/auth";
 import SideBar from './SideBar';
 import TopBar from './TopBar';
 import YourEventPhotos from './YourEventPhotos';
@@ -10,19 +9,24 @@ import Favorites from './Favorites';
 import ListView from './ListView';
 import CircularProgress from '@mui/material/CircularProgress';
 import './MainComponent.css';
-import { useMediaQuery } from '@mui/material';
-import DashboardNavBar from './DashboardNavBar';
 
 const MainComponent = () => {
   const [user, setUser] = useState(null);
   const [event, setEvent] = useState(null);
   const [currentSection, setCurrentSection] = useState('yourPhotos');
   const [loading, setLoading] = useState(true);
-  const [authLoading, setAuthLoading] = useState(true);
-
-  const isMobile = useMediaQuery('(max-width:768px)'); // Define your breakpoint here
 
   useEffect(() => {
+    const fetchUser = async () => {
+      const currentUser = auth.currentUser;
+      if (currentUser) {
+        setUser(currentUser);
+        console.log('Current user:', currentUser);
+      } else {
+        console.log('No current user');
+      }
+    };
+
     const fetchEvent = async () => {
       const eventId = localStorage.getItem('eventId');
       if (eventId) {
@@ -39,22 +43,15 @@ const MainComponent = () => {
 
     const initialize = async () => {
       setLoading(true);
+      await fetchUser();
       await fetchEvent();
       setLoading(false);
     };
 
-    onAuthStateChanged(auth, async (currentUser) => {
-      if (currentUser) {
-        setUser(currentUser);
-        await initialize();
-      } else {
-        setUser(null);
-      }
-      setAuthLoading(false);
-    });
+    initialize();
   }, []);
 
-  if (authLoading || loading) {
+  if (loading) {
     return (
       <div className="loading-container">
         <CircularProgress />
@@ -68,21 +65,18 @@ const MainComponent = () => {
   }
 
   return (
-    <React.Fragment>
-      <div className="main-container">
-        <SideBar user={user} setCurrentSection={setCurrentSection} />
-        {isMobile && <DashboardNavBar user={user} setCurrentSection={setCurrentSection} />}
-        <div className="main-content">
-          <TopBar event={event} />
-          <div className="content">
-            {currentSection === 'yourPhotos' && <YourEventPhotos eventId={event.id} userId={user.uid} />}
-            {currentSection === 'uploadPhotos' && <UploadEventPhotos eventId={event.id} userId={user.uid} />}
-            {currentSection === 'favorites' && <Favorites eventId={event.id} userId={user.uid} />}
-            {currentSection === 'list' && <ListView eventId={event.id} userId={user.uid} />}
-          </div>
+    <div className="main-container">
+      <SideBar user={user} setCurrentSection={setCurrentSection} />
+      <div className="main-content">
+        <TopBar event={event} />
+        <div className="content">
+          {currentSection === 'yourPhotos' && <YourEventPhotos eventId={event.id} userId={user.uid} />}
+          {currentSection === 'uploadPhotos' && <UploadEventPhotos eventId={event.id} userId={user.uid} />}
+          {currentSection === 'favorites' && <Favorites eventId={event.id} userId={user.uid} />}
+          {currentSection === 'list' && <ListView eventId={event.id} userId={user.uid} />}
         </div>
       </div>
-    </React.Fragment>
+    </div>
   );
 };
 

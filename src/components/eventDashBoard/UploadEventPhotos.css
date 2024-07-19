@@ -3,16 +3,16 @@
   }
   
   .photos-grid {
-    margin-top: 20px !important;
+    margin-top: 20px;
   }
   
   .photo-item {
-    position: relative !important;
+    position: relative;
     cursor: pointer;
   }
   
   .photo-wrapper {
-    position: relative !important;
+    position: relative;
     border: 2px solid transparent;
     border-radius: 8px;
     overflow: hidden;
@@ -30,7 +30,7 @@
   }
   
   .favorite-icon {
-    position: absolute !important;
+    position: absolute;
     top: 10px;
     left: 10px;
     background-color: rgba(255, 255, 255, 0.7);
@@ -38,7 +38,7 @@
   }
   
   .delete-icon {
-    position: absolute !important;
+    position: absolute;
     top: 10px;
     right: 10px;
     background-color: rgba(255, 255, 255, 0.7);
@@ -47,21 +47,21 @@
   
   .upload-button,
   .delete-button {
-    background-color: #013220 !important;
+    background-color: #013220;
     color: white;
   }
   
   .upload-button:hover,
   .delete-button:hover {
-    background-color: #014c33 !important;
+    background-color: #014c33;
   }
-/*   
+  
   .photo-actions {
     margin-top: 20px;
     display: flex;
     gap: 10px;
     flex-wrap: wrap;
-  } */
+  }
   
   .upload-modal {
     display: flex;
@@ -92,7 +92,7 @@
     }
   
     .photos-grid {
-      margin-top: 10px !important;
+      margin-top: 10px;
     }
   
     .photo-actions {

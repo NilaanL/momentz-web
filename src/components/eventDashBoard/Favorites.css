@@ -12,27 +12,26 @@
   }
   
   .photo-wrapper {
-    position: relative !important;
+    position: relative;
     border: 2px solid transparent;
     border-radius: 8px;
     overflow: hidden;
   }
   
   .photo-img {
-    width: 100% !important;
-    height: auto !important;
-    display: block !important;
-    border-radius: 8px !important;
-}
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 8px;
+  }
   
   .download-icon {
-      position: absolute !important;
-      top: 10px !important;
-      right: 10px !important;
-      background-color: rgba(255, 255, 255, 0.7) !important;
-      border-radius: 50% !important;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 50%;
   }
-
   
   @media (max-width: 768px) {
     .favorites-container {

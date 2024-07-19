@@ -1,5 +1,4 @@
 import React, { useRef, useState, useEffect, forwardRef, useImperativeHandle } from 'react';
-import { Box, Button, Typography } from '@mui/material';
 
 const CameraCapture = forwardRef(({ onCapture, photoCount }, ref) => {
   const videoRef = useRef(null);
@@ -39,40 +38,24 @@ const CameraCapture = forwardRef(({ onCapture, photoCount }, ref) => {
   };
 
   return (
-    <Box>
+    <div>
       {isCameraOn ? (
-        <Box className='join-event-camera-container' sx={{ textAlign: 'center', mb: 2 }}>
-          <video ref={videoRef} autoPlay style={{ width: '100%', maxWidth: '400px', marginBottom: '10px' }}></video>
-          <Box>
-            <Button 
-              variant="contained" 
-              color="primary" 
-              onClick={capturePhoto}
-              sx={{ mr: 1 }}
-            >
-              Capture Photo
-            </Button>
-            <Button 
-              variant="outlined" 
-              color="secondary" 
-              onClick={() => ref.current.stopCamera()}
-            >
-              Stop Camera
-            </Button>
-          </Box>
-          <Typography variant="body2" sx={{ mt: 1 }}>Photos Taken: {photoCount}</Typography>
-        </Box>
+        <div className='join-event-camera-container'>
+          <video ref={videoRef} autoPlay></video>
+          <button className='join-event-use-camera-button' onClick={capturePhoto}>
+            Capture Photo
+          </button>
+          <button className='join-event-use-camera-button' onClick={() => ref.current.stopCamera()}>
+            Stop Camera
+          </button>
+          <div>Photos Taken: {photoCount}</div>
+        </div>
       ) : (
-        <Button 
-          variant="contained" 
-          color="primary" 
-          onClick={startCamera}
-          startIcon={<i className="fa fa-camera" aria-hidden="true"></i>}
-        >
-          Use Camera
-        </Button>
+        <button className='join-event-use-camera-button' onClick={startCamera}>
+          <i className="fa fa-camera" aria-hidden="true"></i> Use Camera
+        </button>
       )}
-    </Box>
+    </div>
   );
 });
 
