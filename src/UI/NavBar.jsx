@@ -13,13 +13,15 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import { signOutWithGoogle } from '../components/googleAuth/GoogleAuth'; // Import the signOut function
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 
-const pages = ['Dashboard', 'Pricing', 'About US'];
+const pages = ['Host Dashboard', 'Guest Dashboard', 'Pricing', 'About US'];
 const settings = ['Dashboard', 'Logout'];
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const navigate = useNavigate(); // Initialize useNavigate
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -28,8 +30,13 @@ function ResponsiveAppBar() {
     setAnchorElUser(event.currentTarget);
   };
 
-  const handleCloseNavMenu = () => {
+  const handleCloseNavMenu = (page) => {
     setAnchorElNav(null);
+    if (page === 'Host Dashboard') {
+      navigate('/host-dashboard');
+    } else if (page === 'Guest Dashboard') {
+      navigate('/guest-dashboard');
+    }
   };
 
   const handleCloseUserMenu = (setting) => {
@@ -92,7 +99,7 @@ function ResponsiveAppBar() {
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
+                <MenuItem key={page} onClick={() => handleCloseNavMenu(page)}>
                   <Typography textAlign="center">{page}</Typography>
                 </MenuItem>
               ))}
@@ -121,7 +128,7 @@ function ResponsiveAppBar() {
             {pages.map((page) => (
               <Button
                 key={page}
-                onClick={handleCloseNavMenu}
+                onClick={() => handleCloseNavMenu(page)}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
                 {page}
