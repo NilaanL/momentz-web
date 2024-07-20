@@ -121,16 +121,17 @@ const UploadEventPhotos = ({ eventId, userId }) => {
 
   return (
     <div className="upload-event-photos-container">
-      <Button variant="contained" startIcon={<Upload />} onClick={() => setOpen(true)} className="upload-button">
+    <Box display={'flex'} justifyContent={'space-between'} >
+      <Button variant="contained" startIcon={<Upload />} sx={{width:200}} onClick={() => setOpen(true)  } className="upload-button">
         Upload Photos
       </Button>
       {selectedPhotos.length > 0 && (
-        <div className="photo-actions">
-          <Button variant="contained" startIcon={<Delete />} onClick={handleDeleteSelectedPhotos} className="delete-button">
+          <Button variant="contained" startIcon={<Delete />} sx={{width:200}} onClick={handleDeleteSelectedPhotos} className="upload-button">
             Delete Selected
           </Button>
-        </div>
       )}
+
+    </Box>
       <Grid container spacing={2} className="photos-grid">
         {photos.map(photo => {
           const isFavorited = photo.favorites && photo.favorites.includes(userId);

@@ -1,60 +1,60 @@
 .sidebar {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    background-color: #f0f0f0;
-    padding: 20px;
-    height: 100vh;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+    background-color: #f0f0f0 !important;
+    padding: 20px !important;
+    height: 100vh !important;
   }
   
   .profile-section {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
   }
   
   .profile-picture {
-    width: 100px;
-    height: 100px;
-    margin-bottom: 10px;
+    width: 100px !important;
+    height: 100px !important;
+    margin-bottom: 10px !important;
   }
   
   .profile-name {
-    font-size: 18px;
-    text-align: center;
-    color: #013220;
+    font-size: 18px !important;
+    text-align: center !important;
+    color: #013220 !important;
   }
   
   .nav-section {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    flex-grow: 1;
-    justify-content: center;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 10px !important;
+    flex-grow: 1 !important;
+    justify-content: center !important;
   }
   
   .nav-button {
-    background-color: #013220;
-    color: white;
+    background-color: #013220 !important;
+    color: white !important;
   }
   
   .nav-button:hover {
-    background-color: #014c33;
+    background-color: #014c33 !important;
   }
   
   .bottom-section {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 10px !important;
   }
   
   .logout-button,
   .help-button {
-    background-color: #013220;
-    color: white;
+    background-color: #013220 !important;
+    color: white !important;
   }
   
   .logout-button:hover,
   .help-button:hover {
-    background-color: #014c33;
+    background-color: #014c33 !important;
   }

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { auth, db } from './../../dbConfig/firebase';
 import { doc, getDoc } from 'firebase/firestore';
+import { onAuthStateChanged } from "firebase/auth";
 import SideBar from './SideBar';
 import TopBar from './TopBar';
 import YourEventPhotos from './YourEventPhotos';
@@ -15,18 +16,9 @@ const MainComponent = () => {
   const [event, setEvent] = useState(null);
   const [currentSection, setCurrentSection] = useState('yourPhotos');
   const [loading, setLoading] = useState(true);
+  const [authLoading, setAuthLoading] = useState(true);
 
   useEffect(() => {
-    const fetchUser = async () => {
-      const currentUser = auth.currentUser;
-      if (currentUser) {
-        setUser(currentUser);
-        console.log('Current user:', currentUser);
-      } else {
-        console.log('No current user');
-      }
-    };
-
     const fetchEvent = async () => {
       const eventId = localStorage.getItem('eventId');
       if (eventId) {
@@ -43,15 +35,22 @@ const MainComponent = () => {
 
     const initialize = async () => {
       setLoading(true);
-      await fetchUser();
       await fetchEvent();
       setLoading(false);
     };
 
-    initialize();
+    onAuthStateChanged(auth, async (currentUser) => {
+      if (currentUser) {
+        setUser(currentUser);
+        await initialize();
+      } else {
+        setUser(null);
+      }
+      setAuthLoading(false);
+    });
   }, []);
 
-  if (loading) {
+  if (authLoading || loading) {
     return (
       <div className="loading-container">
         <CircularProgress />
