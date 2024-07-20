@@ -1,22 +1,22 @@
 .host-dashboard-container {
-  display: flex !important;
-  flex-direction: row !important;
-  height: 100vh !important;
-}
-
-.host-dashboard-main-content {
-  flex-grow: 1 !important;
-  padding: 20px !important;
-  overflow-y: auto !important;
-  background-color: #f4f4f4 !important;
-}
-
-@media (max-width: 768px) {
-  .host-dashboard-container {
-    flex-direction: column !important;
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
   }
-
-  .host-dashboard-main-content {
-    padding: 10px !important;
+  
+  .host-main-content {
+    flex-grow: 1;
+    padding: 20px;
+    overflow-y: auto;
+    background-color: #f4f4f4;
   }
-}
+  
+  @media (max-width: 768px) {
+    .host-dashboard-container {
+      flex-direction: column;
+    }
+  
+    .host-main-content {
+      padding: 10px;
+    }
+  }
