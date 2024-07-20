@@ -1,6 +1,7 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
 import "./EventDetails.css";
+import ResponsiveAppBar from "../../UI/NavBar";
 
 const EventDetails = () => {
   const location = useLocation();
@@ -28,6 +29,9 @@ const EventDetails = () => {
   };
 
   return (
+    <React.Fragment>
+
+    <ResponsiveAppBar/>
     <div className="event-details-container">
       <div className="event-details-top-color"></div>
       <div className="event-details-box">
@@ -69,6 +73,7 @@ const EventDetails = () => {
         </div>
       </div>
     </div>
+    </React.Fragment>
   );
 };
 

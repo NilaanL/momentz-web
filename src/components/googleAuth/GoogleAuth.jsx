@@ -4,7 +4,16 @@ import { useState } from "react";
 import "./GoogleAuth.css";
 import CreateUserDocument from "../userOps/CreateUserDoc";
 import signInImage from "./sign in image.png";
-import googleSignUpLogo from "./google sign up button.png";
+
+export const signOutWithGoogle = async () => {
+  try {
+    await signOut(auth);
+    console.log("User signed out");
+    localStorage.removeItem("username");
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 const GoogleAuth = () => {
   const [email, setEmail] = useState("");
@@ -21,20 +30,10 @@ const GoogleAuth = () => {
     }
   };
 
-  const signOutWithGoogle = async () => {
-    try {
-      await signOut(auth);
-      console.log("User signed out");
-      localStorage.removeItem("username");
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   return (
     <div className="auth-main-container">
       <div className="auth-container">
-        <div >
+        <div>
           <img src={signInImage} alt="sign in" className="sign-in-image" />
           <div className="hide-image-container">Share event images through 
           Face recognition</div>
@@ -80,7 +79,7 @@ const GoogleAuth = () => {
               ></path>
             </svg>{" "}
             <div>
-            Sign In With Google
+              Sign In With Google
             </div>
           </button>
           <CreateUserDocument />

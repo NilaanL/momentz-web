@@ -51,7 +51,7 @@ const EventConfirmation = () => {
   const handleClick = () => {
     localStorage.setItem("eventId", eventId);
     localStorage.setItem("userId", userId);
-    navigate("/event-dashboard");
+    navigate("/guest-dashboard");
   };
 
   return (
