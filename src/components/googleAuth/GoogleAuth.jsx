@@ -30,40 +30,10 @@ const GoogleAuth = () => {
     }
   };
 
-  const signOutWithGoogle = async () => {
-    try {
-      await signOut(auth);
-      console.log("User signed out");
-      localStorage.removeItem("username");
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   return (
     <div className="auth-main-container">
       <div className="auth-container">
         <div>
-          <img src={signInImage} alt="sign in" className="sign-in-image" />
-          <div className="hide-image-container">Share event images through 
-          Face recognition</div>
-        </div>
-        <div className="auth-form-container">
-          <div className="sign-in-title">Sign In</div>
-          <input
-            placeholder="Email..."
-            onChange={(e) => setEmail(e.target.value)}
-            className="auth-input"
-          />
-          <input
-            placeholder="Password..."
-            type="password"
-            onChange={(e) => setPassword(e.target.value)}
-            className="auth-input"
-          />
-    <div className="auth-main-container">
-      <div className="auth-container">
-        <div >
           <img src={signInImage} alt="sign in" className="sign-in-image" />
           <div className="hide-image-container">Share event images through 
           Face recognition</div>
