@@ -1,0 +1,41 @@
+.event-details-container {
+    padding: 20px;
+  }
+  
+  .event-details-title {
+    margin-bottom: 20px;
+    color: #013220;
+  }
+  
+  .image-upload-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px 0;
+  }
+  
+  .event-image {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .update-button {
+    margin-top: 20px;
+  }
+  
+  @media (max-width: 768px) {
+    .event-details-container {
+      padding: 10px;
+    }
+  
+    .event-details-title {
+      font-size: 24px;
+    }
+  
+    .event-image {
+      max-width: 100%;
+    }
+  }

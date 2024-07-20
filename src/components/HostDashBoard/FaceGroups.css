@@ -1,0 +1,71 @@
+.face-groups-container {
+    padding: 20px;
+  }
+  
+  .face-group {
+    margin-bottom: 40px;
+  }
+  
+  .face-group-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .face-group-title {
+    margin: 0;
+  }
+  
+  .photo-card {
+    position: relative;
+    transition: transform 0.2s;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  
+  .photo-card:hover {
+    transform: scale(1.05);
+  }
+  
+  .photo-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .photo-img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: 10px;
+  }
+  
+  @media (max-width: 768px) {
+    .face-groups-container {
+      padding: 10px;
+    }
+  
+    .face-group {
+      margin-bottom: 30px;
+    }
+  
+    .photo-card {
+      margin-bottom: 20px;
+    }
+  
+    .photo-img {
+      border-radius: 5px;
+    }
+  
+    .photo-header {
+      text-align: center;
+    }
+  
+    .face-group-header {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }

@@ -1,0 +1,22 @@
+.host-dashboard-container {
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+  }
+  
+  .host-main-content {
+    flex-grow: 1;
+    padding: 20px;
+    overflow-y: auto;
+    background-color: #f4f4f4;
+  }
+  
+  @media (max-width: 768px) {
+    .host-dashboard-container {
+      flex-direction: column;
+    }
+  
+    .host-main-content {
+      padding: 10px;
+    }
+  }

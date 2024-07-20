@@ -1,0 +1,104 @@
+.host-sidebar {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 250px;
+    height: 100vh;
+    background-color: #f0f0f0;
+    color: black;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  
+  .profile-section {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .profile-picture {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 10px;
+  }
+  
+  .profile-name {
+    font-size: 18px;
+    font-weight: bold;
+    color: #013220;
+  }
+  
+  .nav-section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex-grow: 1;
+    justify-content: center;
+  }
+  
+  .nav-button {
+    width: 100%;
+    text-align: left;
+    color: white;
+    background-color: #013220;
+    border: 1px solid white;
+    border-radius: 5px;
+    padding: 10px;
+  }
+  
+  .nav-button:hover {
+    background-color: #016a42;
+  }
+  
+  .bottom-section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .logout-button {
+    background-color: #d32f2f;
+    color: white;
+  }
+  
+  .help-button {
+    background-color: #0288d1;
+    color: white;
+  }
+  
+  @media (max-width: 768px) {
+    .host-sidebar {
+      flex-direction: row;
+      flex-wrap: wrap;
+      height: auto;
+      padding: 10px;
+    }
+  
+    .profile-section {
+      flex-basis: 100%;
+      margin-bottom: 10px;
+    }
+  
+    .nav-section {
+      flex-basis: 100%;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+  
+    .nav-button,
+    .logout-button,
+    .help-button {
+      font-size: 14px;
+      padding: 10px;
+      flex-basis: calc(50% - 10px);
+      margin: 5px;
+    }
+  
+    .bottom-section {
+      flex-basis: 100%;
+      flex-direction: row;
+      justify-content: space-between;
+      margin-top: 10px;
+    }
+  }
