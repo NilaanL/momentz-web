@@ -10,12 +10,12 @@ import MyEvents from "../components/eventOps/ListMyEvent";
 import EditEvent from "../components/eventOps/EditEvent";
 import EventDetails from "../components/eventOps/EventDetails";
 import PhotoUpload from "../components/joinEvent/PhotoUpload";
-import EventConfirmation from "../components/joinEvent/EventConfirmation";
 import EventDashboard from "../components/eventDashBoard/EventDashBoard";
 import HomePage from "../Pages/Homepage";
 import CreateEventPage from "../Pages/CreateEventPage";
 import GuestDashBoard from "../components/eventDashBoard/GuestDashboard";
 import HostDashBoardRoute from "../components/HostDashBoard/HostDashBoardComponent";
+import EventConfirmationPage from "../Pages/EventConfirmationPage";
 
 const router = createBrowserRouter([
   { path: "/", element: <HomePage />},
@@ -29,7 +29,7 @@ const router = createBrowserRouter([
   { path: "/edit-event/:eventId", element: <EditEvent/> },
   { path: "/event-details", element: <EventDetails/> },
   { path: "/upload-photos", element: <PhotoUpload/> },
-  { path:"/event-confirmation", element:<EventConfirmation/>},
+  { path:"/event-confirmation", element:<EventConfirmationPage/>},
   { path:"/event-dashboard", element:<EventDashboard/>},
   { path:"/guest-dashboard", element:<GuestDashBoard/>},
   { path:"/host-dashboard", element:<HostDashBoardRoute/>}
