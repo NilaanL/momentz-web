@@ -64,6 +64,7 @@ const MainComponent = () => {
   }
 
   return (
+    <React.Fragment>
     <div className="main-container">
       <SideBar user={user} setCurrentSection={setCurrentSection} />
       <div className="main-content">
@@ -76,6 +77,7 @@ const MainComponent = () => {
         </div>
       </div>
     </div>
+    </React.Fragment>
   );
 };
 
