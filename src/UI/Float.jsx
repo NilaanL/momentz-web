@@ -12,9 +12,9 @@ const FloatContent = () => {
 Let AI do the work!
                 </div>
                 <a href="#join" className="page-scroll">
-                <div className="button_join">
+                <button className="button_join">
                 Start sharing memories
-                </div>
+                </button>
                 </a>
                 
             </div>
