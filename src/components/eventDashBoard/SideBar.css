@@ -1,60 +1,101 @@
-.sidebar {
-    display: flex !important;
-    flex-direction: column !important;
-    justify-content: space-between !important;
-    background-color: #f0f0f0 !important;
-    padding: 20px !important;
-    height: 100vh !important;
+.guest-sidebar {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #f0f0f0;
+  padding: 20px;
+  height: 100vh;
+  width: 250px;
+}
+
+.guest-sidebar .profile-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.guest-sidebar .profile-picture {
+  width: 100px;
+  height: 100px;
+  margin-bottom: 10px;
+}
+
+.guest-sidebar .profile-name {
+  font-size: 18px;
+  text-align: center;
+  color: #013220;
+}
+
+.guest-sidebar .nav-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex-grow: 1;
+  justify-content: center;
+}
+
+.guest-sidebar .nav-button {
+  background-color: #013220;
+  color: white;
+  transition: background-color 0.3s ease;
+}
+
+.guest-sidebar .nav-button:hover {
+  background-color: #014c33;
+}
+
+.guest-sidebar .bottom-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.guest-sidebar .logout-button,
+.guest-sidebar .help-button {
+  background-color: #013220;
+  color: white;
+  transition: background-color 0.3s ease;
+}
+
+.guest-sidebar .logout-button:hover,
+.guest-sidebar .help-button:hover {
+  background-color: #014c33;
+}
+
+.guest-sidebar-menu-button {
+  display: none;
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  z-index: 1000;
+}
+
+.guest-sidebar-close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+@media (max-width: 768px) {
+  .guest-sidebar-desktop {
+    display: none;
   }
-  
-  .profile-section {
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
+
+  .guest-sidebar-menu-button {
+    display: block;
   }
-  
-  .profile-picture {
-    width: 100px !important;
-    height: 100px !important;
-    margin-bottom: 10px !important;
+
+  .guest-sidebar {
+    width: 100%;
+    max-width: 300px;
   }
-  
-  .profile-name {
-    font-size: 18px !important;
-    text-align: center !important;
-    color: #013220 !important;
+}
+
+@media (min-width: 769px) {
+  .guest-sidebar-menu-button,
+  .guest-sidebar-close-button {
+    display: none;
   }
-  
-  .nav-section {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 10px !important;
-    flex-grow: 1 !important;
-    justify-content: center !important;
-  }
-  
-  .nav-button {
-    background-color: #013220 !important;
-    color: white !important;
-  }
-  
-  .nav-button:hover {
-    background-color: #014c33 !important;
-  }
-  
-  .bottom-section {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 10px !important;
-  }
-  
-  .logout-button,
-  .help-button {
-    background-color: #013220 !important;
-    color: white !important;
-  }
-  
-  .logout-button:hover,
-  .help-button:hover {
-    background-color: #014c33 !important;
-  }
+}
